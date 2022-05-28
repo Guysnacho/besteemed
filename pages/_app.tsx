@@ -1,7 +1,7 @@
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { ReactElement, ReactNode } from "react";
 import { CssBaseline } from "@mui/material";
-import Layout from "../Components/layout";
+import Layout from "../Components/Layout";
 import type { AppProps } from "next/app";
 import { NextPage } from "next";
 import "../styles/globals.css";
@@ -31,7 +31,31 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "'Tiro Devanagari Marathi', 'Roboto', 'Helvetica', 'Arial'",
+    fontFamily: "Open Sans",
+    h1: {
+      fontFamily: "Poiret One",
+      fontWeight: 700,
+    },
+    h2: {
+      fontFamily: "Poiret One",
+      fontWeight: 700,
+    },
+    h3: {
+      fontFamily: "Poiret One",
+      fontWeight: 700,
+    },
+    h4: {
+      fontFamily: "Poiret One",
+      fontWeight: 700,
+    },
+    h5: {
+      fontFamily: "Poiret One",
+      fontWeight: 700,
+    },
+    h6: {
+      fontFamily: "Poiret One",
+      fontWeight: 700,
+    },
   },
 });
 

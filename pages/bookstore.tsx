@@ -14,8 +14,6 @@ const Bookstore: NextPage = () => {
       </Head>
 
       <main></main>
-
-      <footer></footer>
     </div>
   );
 };

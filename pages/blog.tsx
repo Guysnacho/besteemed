@@ -14,8 +14,6 @@ const Blog: NextPage = () => {
       </Head>
 
       <main></main>
-
-      <footer></footer>
     </div>
   );
 };

@@ -14,8 +14,6 @@ const Services: NextPage = () => {
       </Head>
 
       <main></main>
-
-      <footer></footer>
     </div>
   );
 };

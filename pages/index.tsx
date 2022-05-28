@@ -11,8 +11,6 @@ const Home: NextPage = () => {
       </Head>
 
       <main></main>
-
-      <footer></footer>
     </div>
   );
 };
