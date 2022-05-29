@@ -1,14 +1,18 @@
+/**
+ * @fileoverview CPR class promo page
+ */
+
 import type { NextPage } from "next";
 import Head from "next/head";
 
 const Services: NextPage = () => {
   return (
     <div>
-      <Head>
-        <title>Services - Bosede Adetunji</title>
+      <Head> {/*Metadate of page*/}
+        <title>CPR - Bosede Adetunji</title>
         <meta
           name="description"
-          content="Welcome to the home of an Esteemed Woman!"
+          content="Bosede is also a licensed CPR instructor, offering classes to groups and individuals"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>

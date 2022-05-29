@@ -6,14 +6,24 @@ import type { AppProps } from "next/app";
 import { NextPage } from "next";
 import "../styles/globals.css";
 
+/**
+ * Setup for layout use in this app
+ * @remarks Setting type for pages with a layout
+ * @type
+ */
 type NextPageWithLayout = NextPage & {
   getLayout?: (page: ReactElement) => ReactNode;
 };
 
+/**
+ * @remarks Type for properties of a page with a layout
+ * @type
+ */
 type AppPropsWithLayout = AppProps & {
   Component: NextPageWithLayout;
 };
 
+// Global theme used, made with https://bareynol.github.io/mui-theme-creator/
 const theme = createTheme({
   components: {
     MuiUseMediaQuery: {
@@ -59,11 +69,16 @@ const theme = createTheme({
   },
 });
 
+/**
+ * Entry point of the application
+ * @function MyApp
+ * @remarks Setting type for pages with a layout
+ */
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
   return (
     <>
-      <CssBaseline />
+      <CssBaseline /> {/*Reset css to a baseline for MUI*/}
       <ThemeProvider theme={theme}>
         <Layout>
           <Component {...pageProps} />

@@ -8,7 +8,7 @@ const Blog: NextPage = () => {
         <title>Blog - Bosede Adetunji</title>
         <meta
           name="description"
-          content="Welcome to the home of an Esteemed Woman!"
+          content="The home of an international organization made by women, for women."
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>

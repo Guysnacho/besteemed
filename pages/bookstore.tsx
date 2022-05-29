@@ -1,3 +1,6 @@
+/**
+ * @fileoverview Book promo page
+ */
 import type { NextPage } from "next";
 import Head from "next/head";
 
@@ -8,7 +11,7 @@ const Bookstore: NextPage = () => {
         <title>Bookstore - Bosede Adetunji</title>
         <meta
           name="description"
-          content="Welcome to the home of an Esteemed Woman!"
+          content="Bosede has written and continues to write about her life and experiences. Enrich your library"
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>

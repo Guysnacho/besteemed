@@ -13,11 +13,17 @@ import type { NextPage } from "next";
 import Image from "next/image";
 import Head from "next/head";
 
+/**
+ * @fileoverview Website homepage
+ * @returns NextPage - A Nextjs Page
+ */
 const Home: NextPage = () => {
   const theme = useTheme();
   return (
     <div>
       <Head>
+        {" "}
+        {/*Metadate of the page*/}
         <title>Home - Bosede Adetunji</title>
         <meta
           name="description"
