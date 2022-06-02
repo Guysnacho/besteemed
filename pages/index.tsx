@@ -1,5 +1,9 @@
 import { Card, CardContent, Grid, Stack, Typography } from "@mui/material";
+import banner from "../assets/banner-long.png";
 import banner2 from "../assets/banner2.png";
+import banner4 from "../assets/banner4.jpg";
+import banner5 from "../assets/banner5.png";
+import background from "../assets/background.png";
 import type { NextPage } from "next";
 import Head from "next/head";
 import ImageCollage from "../Components/Individual/ImageCollage";
@@ -16,22 +20,22 @@ import CreativeCarousel, {
 //Data for populating carousel
 const carouselData = [
   {
-    src: "../" + banner2.src,
+    src: "../" + banner.src,
     heading: "Author",
     body: "Bosede is a published author and continues to write for the growth of others but also for herself. Her subjects range from spirituality and memoirs to self-help and empowerment. You can gleam some of her work in the bookstore here",
   },
   {
-    src: "../" + banner2.src,
+    src: "../" + banner4.src,
     heading: "Trailblazer",
     body: "This esteemed woman leads by example. This means marching with those she wants to protect and proving that anytihng is possible with enough passion and dedication!",
   },
   {
-    src: "../" + banner2.src,
+    src: "../" + background.src,
     heading: "Motivational Speaker",
     body: "Through talks in person and online in the US and to Esteemed Woman groups across the globe, Bosede lifts people up and motivates them to chase their ideas and goals. Check out her outlets here!",
   },
   {
-    src: "../" + banner2.src,
+    src: "../" + banner5.src,
     heading: "Leadership Coach",
     body: "She was coached and certified under the leadership of John C. Maxwell. Bosede equips individuals and organizations with practical tools to break barriers, maximize their strengths, and amplify their success throughout all walks of life.",
   },

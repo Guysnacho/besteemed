@@ -1,4 +1,5 @@
 import { Card, CardMedia, Typography } from "@mui/material";
+import React from "react";
 
 //Consistent typing for properties
 export type CarouselProps = {
@@ -6,6 +7,10 @@ export type CarouselProps = {
   heading: string;
   body: string;
 };
+
+/*shouldComponentUpdate(nextProps, nextState) {
+  return true;
+}*/
 
 const CreativeCarousel = (props: CarouselProps) => {
   return (
@@ -20,4 +25,4 @@ const CreativeCarousel = (props: CarouselProps) => {
     </Card>
   );
 };
-export default CreativeCarousel;
+export default React.memo(CreativeCarousel);

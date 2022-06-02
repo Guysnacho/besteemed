@@ -1,8 +1,9 @@
 import { ImageList, ImageListItem } from "@mui/material";
-import banner1 from "../../assets/banner.png";
+import banner1 from "../../assets/banner-long.png";
 import banner2 from "../../assets/banner2.png";
 import banner3 from "../../assets/banner3.png";
 import banner6 from "../../assets/banner6.png";
+import React from "react";
 
 const imageData = [
   {
@@ -28,10 +29,10 @@ const imageData = [
 
 function srcset(image: string, size: number, rows = 1, cols = 1) {
   return {
-    src: `${image}?w=${size * cols}&h=${size * rows}&fit=crop&auto=format`,
+    src: `${image}?w=${size * cols}&h=${size * rows}&fit=fill&auto=format`,
     srcSet: `${image}?w=${size * cols}&h=${
       size * rows
-    }&fit=crop&auto=format&dpr=2 2x`,
+    }&fit=fill&auto=format&dpr=2 2x`,
   };
 }
 
@@ -59,4 +60,4 @@ const ImageCollage = () => {
   );
 };
 
-export default ImageCollage;
+export default React.memo(ImageCollage);
