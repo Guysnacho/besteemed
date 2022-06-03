@@ -20,29 +20,34 @@ import CreativeCarousel, {
 //Data for populating carousel
 const carouselData = [
   {
-    src: "../" + banner.src,
+    src: banner,
     heading: "Author",
     body: "Bosede is a published author and continues to write for the growth of others but also for herself. Her subjects range from spirituality and memoirs to self-help and empowerment. You can gleam some of her work in the bookstore here",
+    link: "/bookstore"
   },
   {
-    src: "../" + banner4.src,
+    src: banner4,
     heading: "Trailblazer",
     body: "This esteemed woman leads by example. This means marching with those she wants to protect and proving that anytihng is possible with enough passion and dedication!",
+    link: "/esteemed"
   },
   {
-    src: "../" + background.src,
+    src: background,
     heading: "Motivational Speaker",
     body: "Through talks in person and online in the US and to Esteemed Woman groups across the globe, Bosede lifts people up and motivates them to chase their ideas and goals. Check out her outlets here!",
+    link: "/esteemed"
   },
   {
-    src: "../" + banner5.src,
+    src: banner5,
     heading: "Leadership Coach",
     body: "She was coached and certified under the leadership of John C. Maxwell. Bosede equips individuals and organizations with practical tools to break barriers, maximize their strengths, and amplify their success throughout all walks of life.",
+    link: "leadership"
   },
   {
-    src: "../" + banner2.src,
+    src: banner2,
     heading: "Licensed CPR Instructor",
     body: "Bosede is also a licensed CPR instructor, offering classes to groups and individuals looking for a certification. Whether its required for work or if you just want the skill, schedule a class today!",
+    link: "/cpr"
   },
 ];
 const Home: NextPage = () => {
@@ -123,11 +128,12 @@ const Home: NextPage = () => {
         >
           {carouselData.map((item: CarouselProps) => (
             <CreativeCarousel
-              key={item.src}
-              src={item.src}
-              heading={item.heading}
-              body={item.body}
-            />
+            key={item.heading}
+            src={item.src}
+            heading={item.heading}
+            body={item.body}
+            link={item.link}
+          />
           ))}
         </Box>
       </main>
