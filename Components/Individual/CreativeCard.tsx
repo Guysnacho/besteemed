@@ -1,6 +1,5 @@
 import { LinkOutlined } from "@mui/icons-material";
 import {
-  Box,
   Card,
   CardActions,
   CardContent,
@@ -17,16 +16,12 @@ import banner5 from "../../assets/banner5.webp";
 import React from "react";
 
 //Consistent typing for properties
-export type CarouselProps = {
+export type CarouselCard = {
   src: StaticImageData;
   heading: string;
   body: string;
   link: string;
 };
-
-/*shouldComponentUpdate(nextProps, nextState) {
-  return false;
-}*/
 
 //Data for populating carousel
 const carouselData = [
@@ -62,33 +57,29 @@ const carouselData = [
   },
 ];
 
-const CreativeCarousel = () => {
-  return carouselData.map((item) => (
+const CreativeCard = (props: CarouselCard) => {
+  return (
     <Card
-      key={item.heading}
+      key={props.heading}
       sx={{ maxWidth: 300, minWidth: 300, height: "100%", mx: 4 }}
     >
       <CardMedia sx={{ width: "100%", height: "auto" }}>
-        <Image
-          alt={item.heading}
-          src={item.src}
-          layout="responsive"
-        />
+        <Image alt={props.heading} src={props.src} layout="responsive" />
       </CardMedia>
       <CardContent sx={{ pb: 0, mb: -4 }}>
         <Typography textAlign="center" variant="subtitle1" pt={1}>
-          {item.heading}
+          {props.heading}
         </Typography>
         <Typography variant="body2" p={1}>
-          {item.body}{" "}
+          {props.body}{" "}
         </Typography>
       </CardContent>
       <CardActions sx={{ pb: 1, pt: 0, flexFlow: "row-reverse" }}>
-        <IconButton aria-label="card-link" href={item.link}>
+        <IconButton aria-label="card-link" href={props.link}>
           <LinkOutlined sx={{ fontSize: 25 }} />
         </IconButton>
       </CardActions>
     </Card>
-  ));
+  );
 };
-export default CreativeCarousel;
+export default CreativeCard;
