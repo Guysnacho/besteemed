@@ -137,7 +137,7 @@ const Home: NextPage = () => {
         </Grid>
         <Grid container>
           <Grid item xs={12}>
-            <Typography variant="h4" textAlign="center" py={10}>
+            <Typography variant="h4" fontStyle="italic" textAlign="center" py={10}>
               Testimonials
             </Typography>
           </Grid>

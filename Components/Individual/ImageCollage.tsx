@@ -4,35 +4,34 @@ import banner2 from "../../assets/banner2.webp";
 import banner3 from "../../assets/banner3.webp";
 import banner6 from "../../assets/banner6.webp";
 import React from "react";
+import Image from "next/image";
 
 const imageData = [
   {
-    img: banner6.src,
+    img: banner6,
     title: "Bosede preaching",
     rows: 2,
     cols: 2,
   },
   {
-    img: banner1.src,
+    img: banner1,
     title: "Bosede's books",
     rows: 2,
   },
   {
-    img: banner2.src,
+    img: banner2,
     title: "Bosede on the radio",
   },
   {
-    img: banner3.src,
+    img: banner3,
     title: "Bosede at at a Susan G. Komen walk",
   },
 ];
 
 function srcset(image: string, size: number, rows = 1, cols = 1) {
   return {
-    src: `${image}?w=${size * cols}&h=${size * rows}&fit=fill&auto=format`,
-    srcSet: `${image}?w=${size * cols}&h=${
-      size * rows
-    }&fit=fill&auto=format&dpr=2 2x`,
+    src: `${image}`,
+    width: `${size * cols}`,
   };
 }
 
@@ -46,13 +45,18 @@ const ImageCollage = () => {
     >
       {imageData.map((item) => (
         <ImageListItem
-          key={item.img}
+          key={item.img.src}
           cols={item.cols || 1}
           rows={item.rows || 1}
         >
-          <img
-            {...srcset(item.img, 121, item.rows, item.cols)}
+          <Image
+            {...srcset(item.img.src, 121, item.rows, item.cols)}
             alt={item.title}
+            layout="fill"
+            placeholder="blur"
+            objectFit="cover"
+            blurDataURL={item.img.blurDataURL}
+            priority
           />
         </ImageListItem>
       ))}
@@ -60,4 +64,4 @@ const ImageCollage = () => {
   );
 };
 
-export default React.memo(ImageCollage);
+export default ImageCollage;

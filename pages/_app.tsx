@@ -43,29 +43,35 @@ const theme = createTheme({
   typography: {
     fontFamily: "Open Sans",
     h1: {
-      fontFamily: "Poiret One",
-      fontWeight: 700,
+      fontFamily: "Chaparral Pro",
+      fontWeight: 520,
     },
     h2: {
-      fontFamily: "Poiret One",
-      fontWeight: 700,
+      fontFamily: "Chaparral Pro",
+      fontWeight: 520,
     },
     h3: {
-      fontFamily: "Poiret One",
-      fontWeight: 700,
+      fontFamily: "Chaparral Pro",
+      fontWeight: 520,
     },
     h4: {
-      fontFamily: "Poiret One",
-      fontWeight: 700,
+      fontFamily: "Chaparral Pro",
+      fontWeight: 520,
     },
     h5: {
-      fontFamily: "Poiret One",
-      fontWeight: 700,
+      fontFamily: "Chaparral Pro",
+      fontWeight: 520,
     },
     h6: {
-      fontFamily: "Poiret One",
-      fontWeight: 700,
+      fontFamily: "Chaparral Pro",
+      fontWeight: 520,
     },
+    body1: {
+      fontFamily: "Elido",
+    },
+    body2: {
+      fontFamily: "Elido",
+    }
   },
 });
 
