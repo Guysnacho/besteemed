@@ -30,6 +30,14 @@ const Navbar = () => {
     if (newPage === 4) router.push("/cpr");
   };
 
+  //Updates nav if we change page via a different link
+  useEffect(() => {
+    if (router.pathname == "/") setPage(0);
+    if (router.pathname == "/bookstore") setPage(1);
+    if (router.pathname == "/blog") setPage(2);
+    if (router.pathname == "/services") setPage(2);
+  }, [router.pathname]);
+
   return (
     <>
       <Grid
