@@ -28,6 +28,14 @@ const imageData = [
   },
 ];
 
+/**
+ *
+ * @param image
+ * @param size
+ * @param rows
+ * @param cols
+ * @returns atributes for sizing the images
+ */
 function srcset(image: string, size: number, rows = 1, cols = 1) {
   return {
     src: `${image}`,
@@ -35,6 +43,10 @@ function srcset(image: string, size: number, rows = 1, cols = 1) {
   };
 }
 
+/**
+ * @fileoverview Image collage with different aspects of Bosede
+ * @returns 
+ */
 const ImageCollage = () => {
   return (
     <ImageList
@@ -56,7 +68,6 @@ const ImageCollage = () => {
             placeholder="blur"
             objectFit="cover"
             blurDataURL={item.img.blurDataURL}
-            priority
           />
         </ImageListItem>
       ))}

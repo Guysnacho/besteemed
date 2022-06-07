@@ -1,12 +1,12 @@
+import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import {
   Box,
   Card,
   CardContent,
-  Divider,
   Grid,
   Link,
   Stack,
-  Typography,
+  Typography
 } from "@mui/material";
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -18,11 +18,10 @@ import banner4 from "../assets/banner4.webp";
 import banner5 from "../assets/banner5.webp";
 import CreativeCard from "../Components/Individual/CreativeCard";
 import ImageCollage from "../Components/Individual/ImageCollage";
-import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 
 /**
  * @fileoverview Website homepage
- * @returns NextPage - A Nextjs Page
+ * @returns {NextPage} - A Nextjs Page
  */
 
 //Data for populating carousel
@@ -165,7 +164,7 @@ const Home: NextPage = () => {
                 Testimonials
               </Typography>
             </Grid>
-            <Grid item xs={12} px={7} pb={4}>
+            <Grid item xs={12} px={10} pb={4} mb={8}>
               <Card elevation={3} sx={{ display: "flex" }}>
                 <Stack
                   direction="row"
@@ -189,7 +188,12 @@ const Home: NextPage = () => {
                       I highly recommend that all women should buy and read this
                       book{" "}
                     </Typography>
-                    <Typography variant="body1" textAlign="center" mt={2}>
+                    <Typography
+                      variant="body1"
+                      textAlign="center"
+                      mt={2}
+                      px={4}
+                    >
                       {" "}
                       &ldquo;This book stands unique among all books written on
                       &ldquo;women&rdquo; by various authors. In the Esteemed

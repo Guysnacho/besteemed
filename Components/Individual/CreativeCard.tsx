@@ -8,11 +8,6 @@ import {
   Typography,
 } from "@mui/material";
 import Image, { StaticImageData } from "next/image";
-import background from "../../assets/background.webp";
-import banner from "../../assets/banner-long.webp";
-import banner2 from "../../assets/banner2.webp";
-import banner4 from "../../assets/banner4.webp";
-import banner5 from "../../assets/banner5.webp";
 import React from "react";
 
 //Consistent typing for properties
@@ -23,6 +18,12 @@ export type CarouselCard = {
   link: string;
 };
 
+/**
+ * @fileoverview Reusable card component for the carousel
+ * @param props
+ * @returns {React.ReactNode} A Card with a picture, text, and a link
+ *
+ */
 const CreativeCard = (props: CarouselCard) => {
   return (
     <Card
