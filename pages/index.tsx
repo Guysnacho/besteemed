@@ -1,14 +1,24 @@
-import { Card, CardContent, Grid, Stack, Typography } from "@mui/material";
-import CreativeCarousel from "../Components/Individual/CreativeCard";
-import ImageCollage from "../Components/Individual/ImageCollage";
+import {
+  Box,
+  Card,
+  CardContent,
+  Divider,
+  Grid,
+  Link,
+  Stack,
+  Typography,
+} from "@mui/material";
 import type { NextPage } from "next";
+import Head from "next/head";
+import Image from "next/image";
 import background from "../assets/background.webp";
 import banner from "../assets/banner-long.webp";
 import banner2 from "../assets/banner2.webp";
 import banner4 from "../assets/banner4.webp";
 import banner5 from "../assets/banner5.webp";
-import Head from "next/head";
 import CreativeCard from "../Components/Individual/CreativeCard";
+import ImageCollage from "../Components/Individual/ImageCollage";
+import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 
 /**
  * @fileoverview Website homepage
@@ -63,88 +73,154 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <Grid container component={Card} elevation={3} sx={{ borderRadius: 0 }}>
-          <Grid item xs={12} md={8} width="100%" height="100%">
-            <ImageCollage />
-          </Grid>
-
+        <Grid container width="100%">
           <Grid
-            item
-            xs={12}
-            md={4}
-            sx={{ xs: { p: 3, height: "75%", my: "auto" }, md: { px: 0 } }}
+            container
+            component={Card}
+            elevation={3}
+            sx={{ borderRadius: 0 }}
           >
-            <Card
-              sx={{
-                width: "100%",
-                my: "auto",
-              }}
-              variant="outlined"
-            >
-              <CardContent>
-                <Typography variant="h6" textAlign="center">
-                  Bosede Adetunji
-                </Typography>
-                <Typography
-                  variant="body1"
-                  textAlign="justify"
-                  p={3}
-                  sx={{
-                    maxHeight: "20rem",
-                    textOverflow: "clip",
-                    overflow: "scroll",
-                    overflowX: "hidden",
-                    overflowY: "auto",
-                  }}
-                >
-                  Bosede Adetunji is a Certified Life and Leadership Coach,
-                  Pastor, Author &amp; Motivational Speaker, and empowerer of
-                  many. She was coached and certified under the direct
-                  leadership of the legendary John C. Maxwell. Bosede equips
-                  individuals and organizations with practical tools that enable
-                  them to break barriers, maximize their abilities, and amplify
-                  their success throughout all walks of life.
-                </Typography>
-              </CardContent>
-            </Card>
-          </Grid>
-        </Grid>
-        <Typography variant="h4" textAlign="center" py={10}>
-          I am a _______
-        </Typography>
+            <Grid item xs={12} md={8} width="100%" height="100%">
+              <ImageCollage />
+            </Grid>
 
-        <Grid
-          flexDirection="row"
-          spacing={5}
-          flexWrap="nowrap"
-          container
-          sx={{
-            overflowX: "scroll",
-            overflowY: "hidden",
-            mb: 3,
-            p: [0, 4, 4, 4],
-          }}
-        >
-          {carouselData.map((item) => (
-            <CreativeCard
-              key={item.heading}
-              src={item.src}
-              heading={item.heading}
-              body={item.body}
-              link={item.link}
-            />
-          ))}
-        </Grid>
-        <Grid container>
-          <Grid item xs={12}>
-            <Typography variant="h4" fontStyle="italic" textAlign="center" py={10}>
-              Testimonials
-            </Typography>
+            <Grid
+              item
+              xs={12}
+              md={4}
+              sx={{ xs: { p: 3, height: "75%", my: "auto" }, md: { px: 0 } }}
+            >
+              <Card
+                sx={{
+                  width: "100%",
+                  my: "auto",
+                }}
+                variant="outlined"
+              >
+                <CardContent>
+                  <Typography variant="h6" textAlign="center">
+                    Bosede Adetunji
+                  </Typography>
+                  <Typography
+                    variant="body1"
+                    textAlign="justify"
+                    p={3}
+                    sx={{
+                      maxHeight: "20rem",
+                      textOverflow: "clip",
+                      overflow: "scroll",
+                      overflowX: "hidden",
+                      overflowY: "auto",
+                    }}
+                  >
+                    Bosede Adetunji is a Certified Life and Leadership Coach,
+                    Pastor, Author &amp; Motivational Speaker, and empowerer of
+                    many. She was coached and certified under the direct
+                    leadership of the legendary John C. Maxwell. Bosede equips
+                    individuals and organizations with practical tools that
+                    enable them to break barriers, maximize their abilities, and
+                    amplify their success throughout all walks of life.
+                  </Typography>
+                </CardContent>
+              </Card>
+            </Grid>
           </Grid>
+
           <Grid item xs={12}>
             <Typography variant="h4" textAlign="center" py={10}>
               I am a _______
             </Typography>
+          </Grid>
+
+          <Grid
+            flexDirection="row"
+            spacing={5}
+            flexWrap="nowrap"
+            container
+            sx={{
+              overflowX: "scroll",
+              overflowY: "hidden",
+              mb: 3,
+              p: [0, 4, 4, 4],
+            }}
+          >
+            {carouselData.map((item) => (
+              <CreativeCard
+                key={item.heading}
+                src={item.src}
+                heading={item.heading}
+                body={item.body}
+                link={item.link}
+              />
+            ))}
+          </Grid>
+          <Grid container>
+            <Grid item xs={12}>
+              <Typography
+                variant="h4"
+                fontStyle="italic"
+                textAlign="center"
+                py={10}
+              >
+                Testimonials
+              </Typography>
+            </Grid>
+            <Grid item xs={12} px={7} pb={4}>
+              <Card elevation={3} sx={{ display: "flex" }}>
+                <Stack
+                  direction="row"
+                  divider={
+                    <FormatQuoteIcon color="primary" sx={{ opacity: "50%" }} />
+                  }
+                  justifyContent="space-between"
+                  alignItems="center"
+                  mb={-1}
+                >
+                  <Box width={"45%"}>
+                    <Image
+                      src={banner}
+                      placeholder="blur"
+                      layout="intrinsic"
+                      alt="Testimonial book picture"
+                    />
+                  </Box>
+                  <Box width={"45%"} pr={5}>
+                    <Typography variant="h6" textAlign="center">
+                      I highly recommend that all women should buy and read this
+                      book{" "}
+                    </Typography>
+                    <Typography variant="body1" textAlign="center" mt={2}>
+                      {" "}
+                      &ldquo;This book stands unique among all books written on
+                      &ldquo;women&rdquo; by various authors. In the Esteemed
+                      Woman, the author encourages women of all ages to rise up
+                      to fulfil their destiny because not...&rdquo;
+                    </Typography>
+                    <Box textAlign="center" mt={2}>
+                      <Link
+                        variant="body1"
+                        textAlign="center"
+                        color="primary"
+                        underline="hover"
+                        href="https://www.amazon.com/review/R26HU5DFZTWJYC/ref=cm_cr_srp_d_rdp_perm?ie=UTF8&ASIN=B07CVL5T68"
+                        target="_blank"
+                        rel="noopener"
+                      >
+                        Read the full review
+                      </Link>
+                    </Box>
+                    <Typography
+                      variant="subtitle1"
+                      fontStyle="italic"
+                      textAlign="center"
+                      mt={2}
+                    >
+                      Emmanuel Adegboye - May 21, 2018
+                    </Typography>
+                  </Box>
+                </Stack>
+              </Card>
+            </Grid>
           </Grid>
         </Grid>
       </main>
