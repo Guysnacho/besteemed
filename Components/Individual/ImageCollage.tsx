@@ -39,7 +39,7 @@ const imageData = [
 function srcset(image: string, size: number, rows = 1, cols = 1) {
   return {
     src: `${image}`,
-    width: `${size * cols}`,
+    //width: `${size * cols}`,
   };
 }
 
