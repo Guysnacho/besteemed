@@ -1,13 +1,31 @@
 /**
  * @fileoverview Book promo page
  */
-import { Box, Card, CardMedia, Grid, Stack, Typography } from "@mui/material";
-import book1 from "../assets/books/1Esteemed.webp";
+import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
+import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
+import {
+  Card,
+  CardActions,
+  CardMedia,
+  Grid,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import book1 from "../assets/books/1Esteemed.webp";
+import IconLink from "../Components/Individual/IconLink";
 
+/**
+ * @fileoverview Bookstore page
+ * @returns {NextPage} - A Nextjs Page
+ */
 const Bookstore: NextPage = () => {
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <div>
       <Head>
@@ -26,14 +44,20 @@ const Bookstore: NextPage = () => {
               variant="h3"
               textAlign="center"
               fontStyle="italic"
-              mb={4}
+              mx={15}
             >
               A Collection of Inspiring Books for Women Leaders
             </Typography>
           </Grid>
-          <Grid container>
-            <Grid item xs={6}>
-              <Card sx={{ width: "25rem", mx: "auto" }} elevation={17}>
+          <Grid container my={7}>
+            <Grid item xs={12} md={6} my="auto" sx={matches ? { mb: 5 } : {}}>
+              <Card
+                sx={{
+                  width: "23rem",
+                  mx: "auto",
+                }}
+                elevation={17}
+              >
                 <CardMedia
                   sx={{ width: "100%", justifyContent: "space-around" }}
                 >
@@ -44,10 +68,26 @@ const Bookstore: NextPage = () => {
                     objectPosition="top"
                   />
                 </CardMedia>
+                <CardActions>
+                  <Stack
+                    direction="row"
+                    width="100%"
+                    justifyContent="space-evenly"
+                  >
+                    <IconLink
+                      href="https://www.amazon.com/Esteemed-Woman-Guiding-Celebrate-Womanhood-ebook/dp/B07CVL5T68/ref=sr_1_2?qid=1654737068&refinements=p_27%3ABosede+Adetunji&s=books&sr=1-2&text=Bosede+Adetunji"
+                      child={<ShoppingCartOutlinedIcon />}
+                    />
+                    <IconLink
+                      href="https://www.amazon.com/Esteemed-Woman-Guiding-Celebrate-Womanhood-ebook/product-reviews/B07CVL5T68/"
+                      child={<RateReviewOutlinedIcon />}
+                    />
+                  </Stack>
+                </CardActions>
               </Card>
             </Grid>
-            <Grid item xs={6}>
-              <Stack direction="column" spacing={3} sx={{ px: 15 }}>
+            <Grid item xs={12} md={6}>
+              <Stack direction="column" spacing={3} sx={{ px: 7, mx: 5 }}>
                 <Typography
                   variant="caption"
                   textAlign="center"

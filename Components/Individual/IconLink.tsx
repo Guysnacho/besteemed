@@ -7,7 +7,7 @@ import { ReactNode } from "react";
 type IconLinkProps = {
   href: string;
   child: ReactNode;
-  color: string;
+  color?: string;
 };
 
 /**
@@ -19,8 +19,7 @@ const IconLink = (props: IconLinkProps) => {
   return (
     <IconButton
       href={props.href}
-      color={undefined}
-      sx={{ color: props.color }}
+      sx={props.color ? { color: props.color } : {}}
       target={props.href.includes("614") ? "_parent" : "_blank"}
       rel="noopener"
     >
