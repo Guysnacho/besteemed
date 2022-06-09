@@ -8,6 +8,7 @@ import {
   CardActions,
   CardMedia,
   Grid,
+  Pagination,
   Stack,
   Typography,
   useMediaQuery,
@@ -49,12 +50,13 @@ const Bookstore: NextPage = () => {
               A Collection of Inspiring Books for Women Leaders
             </Typography>
           </Grid>
-          <Grid container my={7}>
-            <Grid item xs={12} md={6} my="auto" sx={matches ? { mb: 5 } : {}}>
+          <Grid container my={7} sx={!matches ? { mb: 15 } : {}}>
+            <Grid item xs={12} md={6} my="auto">
               <Card
                 sx={{
                   width: "23rem",
                   mx: "auto",
+                  mb: 5,
                 }}
                 elevation={17}
               >
@@ -85,8 +87,21 @@ const Bookstore: NextPage = () => {
                   </Stack>
                 </CardActions>
               </Card>
+              <Stack
+                spacing={2}
+                direction="row"
+                justifyContent="space-around"
+                sx={!matches ? { mt: 5 } : {}}
+              >
+                <Pagination
+                  count={3}
+                  variant="outlined"
+                  color="primary"
+                  size="large"
+                />
+              </Stack>
             </Grid>
-            <Grid item xs={12} md={6}>
+            <Grid item xs={12} md={6} mt={!matches ? undefined : 5}>
               <Stack direction="column" spacing={3} sx={{ px: 7, mx: 5 }}>
                 <Typography
                   variant="caption"
