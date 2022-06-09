@@ -11,11 +11,11 @@ import {
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import background from "../assets/background.webp";
-import banner from "../assets/banner-long.webp";
-import banner2 from "../assets/banner2.webp";
-import banner4 from "../assets/banner4.webp";
-import banner5 from "../assets/banner5.webp";
+import background from "../assets/banners/background.webp";
+import banner from "../assets/banners/banner-long.webp";
+import banner2 from "../assets/banners/banner2.webp";
+import banner4 from "../assets/banners/banner4.webp";
+import banner5 from "../assets/banners/banner5.webp";
 import CreativeCard from "../Components/Individual/CreativeCard";
 import ImageCollage from "../Components/Individual/ImageCollage";
 
