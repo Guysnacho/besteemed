@@ -12,21 +12,34 @@ import {
   Stack,
   Typography,
   useMediaQuery,
-  useTheme,
+  useTheme
 } from "@mui/material";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import book1 from "../assets/books/1Esteemed.webp";
+import { useState } from "react";
+import bookCover1 from "../assets/books/1Esteemed.webp";
+import bookCover2 from "../assets/books/2Leaders.webp";
+import bookCover3 from "../assets/books/3From.webp";
+import books from "../assets/data.json";
 import IconLink from "../Components/Individual/IconLink";
 
+const bookData = [...books.books];
+const bookCovers = [bookCover1, bookCover2, bookCover3];
 /**
- * @fileoverview Bookstore page
  * @returns {NextPage} - A Nextjs Page
  */
 const Bookstore: NextPage = () => {
+  //App state
+  const [page, setPage] = useState(1); //Tracking the page of the pagination
   const theme = useTheme();
+
+  //Media query to check if we're below md viewport width
   const matches = useMediaQuery(theme.breakpoints.down("md"));
+
+  const handleChange = (event: React.ChangeEvent<number>, value: number) => {
+    setPage(value);
+  };
   return (
     <div>
       <Head>
@@ -65,9 +78,11 @@ const Bookstore: NextPage = () => {
                 >
                   <Image
                     alt="Bosede Book"
-                    src={book1}
+                    src={bookCovers[page - 1]}
                     layout="responsive"
                     objectPosition="top"
+                    loading="eager"
+                    priority
                   />
                 </CardMedia>
                 <CardActions>
@@ -77,11 +92,11 @@ const Bookstore: NextPage = () => {
                     justifyContent="space-evenly"
                   >
                     <IconLink
-                      href="https://www.amazon.com/Esteemed-Woman-Guiding-Celebrate-Womanhood-ebook/dp/B07CVL5T68/ref=sr_1_2?qid=1654737068&refinements=p_27%3ABosede+Adetunji&s=books&sr=1-2&text=Bosede+Adetunji"
+                      href={bookData[page - 1].shoppingLink}
                       child={<ShoppingCartOutlinedIcon />}
                     />
                     <IconLink
-                      href="https://www.amazon.com/Esteemed-Woman-Guiding-Celebrate-Womanhood-ebook/product-reviews/B07CVL5T68/"
+                      href={bookData[page - 1].reviewLink}
                       child={<RateReviewOutlinedIcon />}
                     />
                   </Stack>
@@ -95,6 +110,8 @@ const Bookstore: NextPage = () => {
               >
                 <Pagination
                   count={3}
+                  page={page}
+                  onChange={handleChange}
                   variant="outlined"
                   color="primary"
                   size="large"
@@ -112,32 +129,16 @@ const Bookstore: NextPage = () => {
                   #1
                 </Typography>
                 <Typography variant="h3" textAlign="center">
-                  The Esteemed Woman
+                  {bookData[page - 1].title}
                 </Typography>
                 <Typography variant="subtitle1" textAlign="center">
-                  Guiding Steps to Overcoming Obstacles of Life
+                  {bookData[page - 1].subtitle}
                 </Typography>
                 <Typography variant="body1">
-                  We are all uniquely created to fulfill our destinies and
-                  purposes. There are no two DNA strands or fingerprints. In the
-                  same manner, you are an original, and there is no other
-                  duplicate. In your quest to fulfill your purpose, you may
-                  encounter roadblocks that challenge your faith. You may be
-                  discouraged and be tempted to throw in the towel. No two paths
-                  are identical. While some may be rocky, others may be smooth.
-                  Perhaps yours was miry or you had some challenges that seemed
-                  rigid and hard as concrete. Whatever your path may look like,
-                  be encouraged as you read this book.
+                  {bookData[page - 1].body1}
                 </Typography>
                 <Typography variant="body1">
-                  &ldquo;From the Miry Clay&rdquo; is a practical guide that is
-                  equipped with real-life applications, scenarios, and stories
-                  that are geared to see women leaders through any situation
-                  they may find yourself in. Each chapter is highlighted with
-                  some prayer points that are designed to strengthen your faith
-                  and encourage you as you walk your path. “Many are the
-                  afflictions of the righteous, but God delivers him from them
-                  all.” (Psalms 34:19)
+                  {bookData[page - 1].body2}
                 </Typography>
               </Stack>
             </Grid>
