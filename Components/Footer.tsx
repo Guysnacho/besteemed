@@ -3,7 +3,14 @@ import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
 import YouTubeIcon from "@mui/icons-material/YouTube";
-import { Grid, Link, Stack, Typography, useTheme } from "@mui/material";
+import {
+  Grid,
+  Link,
+  Stack,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import IconLink from "./Individual/IconLink";
 
 const Footer = () => {
@@ -11,10 +18,12 @@ const Footer = () => {
   const contrastColor = theme.palette.getContrastText(
     theme.palette.primary.dark
   );
+  const matches = useMediaQuery(theme.breakpoints.down("md"));
   return (
     <footer>
       <Grid
         container
+        component="footer"
         width="100%"
         justifyContent="center"
         mt={3}
@@ -30,8 +39,10 @@ const Footer = () => {
       >
         <Grid
           item
-          xs={4}
-          sx={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+          md={4}
+          xs={12}
+          justifyContent={matches ? "center" : "unset"}
+          sx={{ display: "flex", alignItems: "center" }}
         >
           <Typography variant="body1" mr={1}>
             © 2021 Copyright:
@@ -47,7 +58,7 @@ const Footer = () => {
             www.BosedeAdetunji.com
           </Link>
         </Grid>
-        <Grid item xs={4}>
+        <Grid item xs={12} md={4}>
           <Typography variant="body1" textAlign="center">
             Connect with us!
           </Typography>
@@ -86,11 +97,12 @@ const Footer = () => {
         </Grid>
         <Grid
           item
-          xs={4}
+          md={4}
+          xs={12}
           sx={{
             display: "flex",
             flexDirection: "row",
-            justifyContent: "flex-end",
+            justifyContent: matches ? "center" : "flex-end",
             alignItems: "center",
           }}
         >
