@@ -2,6 +2,12 @@
 
 Home of the new Esteemed Woman website
 
+### Next Steps
+
+[ ] - Change index into huge hero with links
+[ ] - Optimize layout, something is getting in the way of responsive sizing and I don't wanna blame it on myself. Remove in the meantime
+[ ] - Add initiatives (CPR, Esteemed Woman Abroad, Israel Excursions)
+
 ## Getting Started
 
 First, install the dependencies
