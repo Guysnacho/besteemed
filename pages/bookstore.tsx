@@ -12,7 +12,7 @@ import {
   Stack,
   Typography,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from "@mui/material";
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -37,7 +37,7 @@ const Bookstore: NextPage = () => {
   //Media query to check if we're below md viewport width
   const matches = useMediaQuery(theme.breakpoints.down("md"));
 
-  const handleChange = (event: React.ChangeEvent<number>, value: number) => {
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
   return (
@@ -126,12 +126,12 @@ const Bookstore: NextPage = () => {
                   fontSize="1.5rem"
                   sx={{ opacity: "65%" }}
                 >
-                  #1
+                  #{page}
                 </Typography>
-                <Typography variant="h3" textAlign="center">
+                <Typography variant="h4" textAlign="center">
                   {bookData[page - 1].title}
                 </Typography>
-                <Typography variant="subtitle1" textAlign="center">
+                <Typography variant="subtitle1" fontStyle="oblique" textAlign="center">
                   {bookData[page - 1].subtitle}
                 </Typography>
                 <Typography variant="body1">

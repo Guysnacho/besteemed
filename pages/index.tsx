@@ -113,7 +113,7 @@ const Home: NextPage = () => {
                     }}
                   >
                     Bosede Adetunji is a Certified Life and Leadership Coach,
-                    Pastor, Author &amp; Motivational Speaker, and empowerer of
+                    Pastor, Author, Motivational Speaker, and empowerer of
                     many. She was coached and certified under the direct
                     leadership of the legendary John C. Maxwell. Bosede equips
                     individuals and organizations with practical tools that
@@ -195,10 +195,10 @@ const Home: NextPage = () => {
                       px={4}
                     >
                       {" "}
-                      &ldquo;This book stands unique among all books written on
-                      &ldquo;women&rdquo; by various authors. In the Esteemed
+                      This book stands unique among all books written on
+                      women by various authors. In the Esteemed
                       Woman, the author encourages women of all ages to rise up
-                      to fulfil their destiny because not...&rdquo;
+                      to fulfil their destiny because not...
                     </Typography>
                     <Box textAlign="center" mt={2}>
                       <Link
