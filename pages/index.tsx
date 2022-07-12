@@ -6,18 +6,23 @@ import {
   Grid,
   Link,
   Stack,
-  Typography
+  Typography,
 } from "@mui/material";
+import "keen-slider/keen-slider.min.css";
+import { useKeenSlider } from "keen-slider/react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import { useState } from "react";
 import background from "../assets/banners/background.webp";
 import banner from "../assets/banners/banner-long.webp";
 import banner2 from "../assets/banners/banner2.webp";
 import banner4 from "../assets/banners/banner4.webp";
 import banner5 from "../assets/banners/banner5.webp";
+import banner6 from "../assets/banners/banner6.webp";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CreativeCard from "../Components/Individual/CreativeCard";
-import ImageCollage from "../Components/Individual/ImageCollage";
 
 /**
  * @fileoverview Website homepage
@@ -59,6 +64,57 @@ const carouselData = [
 ];
 
 const Home: NextPage = () => {
+  const [opacities, setOpacities] = useState<number[]>([]);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [loaded, setLoaded] = useState(false);
+  const [refCallback, slider] = useKeenSlider(
+    {
+      slides: carouselData.length,
+      slideChanged() {
+        setCurrentSlide(slider.current.track.details.rel);
+      },
+      loop: true,
+      detailsChanged(s) {
+        const new_opacities = s.track.details.slides.map(
+          (slide) => slide.portion
+        );
+        setOpacities(new_opacities);
+      },
+      created() {
+        setLoaded(true);
+      },
+    },
+    [
+      (slider) => {
+        let timeout: ReturnType<typeof setTimeout>;
+        let mouseOver = false;
+        function clearNextTimeout() {
+          clearTimeout(timeout);
+        }
+        function nextTimeout() {
+          clearTimeout(timeout);
+          if (mouseOver) return;
+          timeout = setTimeout(() => {
+            slider.next();
+          }, 5000);
+        }
+        slider.on("created", () => {
+          slider.container.addEventListener("mouseover", () => {
+            mouseOver = true;
+            clearNextTimeout();
+          });
+          slider.container.addEventListener("mouseout", () => {
+            mouseOver = false;
+            nextTimeout();
+          });
+          nextTimeout();
+        });
+        slider.on("dragStarted", clearNextTimeout);
+        slider.on("animationEnded", nextTimeout);
+        slider.on("updated", nextTimeout);
+      },
+    ]
+  );
   return (
     <>
       <Head>
@@ -73,56 +129,53 @@ const Home: NextPage = () => {
 
       <main>
         <Grid container width="100%">
-          <Grid
-            container
-            component={Card}
-            elevation={3}
-            sx={{ borderRadius: 0 }}
-          >
-            <Grid item xs={12} md={8} width="100%" height="100%">
-              <ImageCollage />
-            </Grid>
-
-            <Grid
-              item
-              xs={12}
-              md={4}
-              sx={{ xs: { p: 3, height: "75%", my: "auto" }, md: { px: 0 } }}
+          <Grid item xs={12}>
+            <Image
+              src={banner6}
+              alt="Bosede speaking"
+              layout="intrinsic"
+              objectPosition="0px"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h2" textAlign="center" my={4}>
+              An Esteemed Woman
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sx={{ xs: { p: 3, my: "auto" }, md: { px: 0 } }}>
+            <Card
+              sx={{
+                width: "60%",
+                mx: "auto",
+              }}
+              variant="outlined"
             >
-              <Card
-                sx={{
-                  width: "100%",
-                  my: "auto",
-                }}
-                variant="outlined"
-              >
-                <CardContent>
-                  <Typography variant="h6" textAlign="center">
-                    Bosede Adetunji
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    textAlign="justify"
-                    p={3}
-                    sx={{
-                      maxHeight: "20rem",
-                      textOverflow: "clip",
-                      overflow: "scroll",
-                      overflowX: "hidden",
-                      overflowY: "auto",
-                    }}
-                  >
-                    Bosede Adetunji is a Certified Life and Leadership Coach,
-                    Pastor, Author, Motivational Speaker, and empowerer of
-                    many. She was coached and certified under the direct
-                    leadership of the legendary John C. Maxwell. Bosede equips
-                    individuals and organizations with practical tools that
-                    enable them to break barriers, maximize their abilities, and
-                    amplify their success throughout all walks of life.
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+              <CardContent>
+                <Typography variant="h4" textAlign="center">
+                  Bosede Adetunji
+                </Typography>
+                <Typography
+                  variant="body1"
+                  textAlign="center"
+                  p={3}
+                  sx={{
+                    maxHeight: "20rem",
+                    textOverflow: "clip",
+                    overflow: "scroll",
+                    overflowX: "hidden",
+                    overflowY: "auto",
+                  }}
+                >
+                  Bosede Adetunji is a Certified Life and Leadership Coach,
+                  Pastor, Author, Motivational Speaker, and empowerer of many.
+                  She was coached and certified under the direct leadership of
+                  the legendary John C. Maxwell. Bosede equips individuals and
+                  organizations with practical tools that enable them to break
+                  barriers, maximize their abilities, and amplify their success
+                  throughout all walks of life.
+                </Typography>
+              </CardContent>
+            </Card>
           </Grid>
 
           <Grid item xs={12}>
@@ -131,16 +184,21 @@ const Home: NextPage = () => {
             </Typography>
           </Grid>
 
+          <Grid item xs={2}>
+            <ArrowBackIosIcon />
+          </Grid>
           <Grid
+            item
+            xs={8}
             flexDirection="row"
-            spacing={5}
             flexWrap="nowrap"
-            container
+            ref={refCallback}
+            position="relative"
+            className="keen-slider"
             sx={{
-              overflowX: "scroll",
+              overflowX: "hidden",
               overflowY: "hidden",
               mb: 3,
-              p: [0, 4, 4, 4],
             }}
           >
             {carouselData.map((item) => (
@@ -150,8 +208,13 @@ const Home: NextPage = () => {
                 heading={item.heading}
                 body={item.body}
                 link={item.link}
+                className="keen-slider__slide"
               />
             ))}
+          </Grid>
+
+          <Grid item xs={2}>
+            <ArrowForwardIosIcon />
           </Grid>
           <Grid container>
             <Grid item xs={12}>
@@ -194,11 +257,10 @@ const Home: NextPage = () => {
                       mt={2}
                       px={4}
                     >
-                      {" "}
-                      This book stands unique among all books written on
-                      women by various authors. In the Esteemed
-                      Woman, the author encourages women of all ages to rise up
-                      to fulfil their destiny because not...
+                      This book stands unique among all books written on women
+                      by various authors. In the Esteemed Woman, the author
+                      encourages women of all ages to rise up to fulfil their
+                      destiny because not...
                     </Typography>
                     <Box textAlign="center" mt={2}>
                       <Link
