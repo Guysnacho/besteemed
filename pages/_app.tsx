@@ -1,9 +1,9 @@
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { ReactElement, ReactNode } from "react";
 import { CssBaseline } from "@mui/material";
-import Layout from "../Components/Layout";
-import type { AppProps } from "next/app";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { NextPage } from "next";
+import type { AppProps } from "next/app";
+import { ReactElement, ReactNode } from "react";
+import Layout from "../Components/Layout";
 import "../styles/globals.css";
 
 /**
@@ -68,10 +68,12 @@ const theme = createTheme({
     },
     body1: {
       fontFamily: "Elido",
+      fontSize: 17,
     },
     body2: {
       fontFamily: "Elido",
-    }
+      fontSize: 17,
+    },
   },
 });
 

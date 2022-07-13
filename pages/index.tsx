@@ -1,9 +1,12 @@
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import {
   Box,
   Card,
   CardContent,
   Grid,
+  IconButton,
   Link,
   Stack,
   Typography,
@@ -20,8 +23,6 @@ import banner2 from "../assets/banners/banner2.webp";
 import banner4 from "../assets/banners/banner4.webp";
 import banner5 from "../assets/banners/banner5.webp";
 import banner6 from "../assets/banners/banner6.webp";
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import CreativeCard from "../Components/Individual/CreativeCard";
 
 /**
@@ -64,11 +65,11 @@ const carouselData = [
 ];
 
 const Home: NextPage = () => {
-  const [opacities, setOpacities] = useState<number[]>([]);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [loaded, setLoaded] = useState(false);
+  //App state
+  const [currentSlide, setCurrentSlide] = useState(0); //Tracking the page of the pagination
   const [refCallback, slider] = useKeenSlider(
     {
+      initial: 0,
       slides: carouselData.length,
       slideChanged() {
         setCurrentSlide(slider.current.track.details.rel);
@@ -78,10 +79,6 @@ const Home: NextPage = () => {
         const new_opacities = s.track.details.slides.map(
           (slide) => slide.portion
         );
-        setOpacities(new_opacities);
-      },
-      created() {
-        setLoaded(true);
       },
     },
     [
@@ -115,6 +112,16 @@ const Home: NextPage = () => {
       },
     ]
   );
+
+  // Functions
+  const goBack = (e: any) => {
+    e.stopPropagation() || slider.current?.prev();
+  };
+
+  const goForward = (e: any) => {
+    e.stopPropagation() || slider.current?.next();
+  };
+
   return (
     <>
       <Head>
@@ -139,7 +146,7 @@ const Home: NextPage = () => {
           </Grid>
           <Grid item xs={12}>
             <Typography variant="h2" textAlign="center" my={4}>
-              An Esteemed Woman
+              Bosede Adetunji
             </Typography>
           </Grid>
           <Grid item xs={12} sx={{ xs: { p: 3, my: "auto" }, md: { px: 0 } }}>
@@ -152,7 +159,7 @@ const Home: NextPage = () => {
             >
               <CardContent>
                 <Typography variant="h4" textAlign="center">
-                  Bosede Adetunji
+                  An Esteemed Woman
                 </Typography>
                 <Typography
                   variant="body1"
@@ -184,12 +191,19 @@ const Home: NextPage = () => {
             </Typography>
           </Grid>
 
-          <Grid item xs={2}>
-            <ArrowBackIosIcon />
+          <Grid item xs={2} md={3} display="flex" alignItems="center">
+            <IconButton
+              onClick={goBack}
+              disabled={currentSlide === 0}
+              sx={{ mx: "auto" }}
+            >
+              <ArrowBackIosIcon />
+            </IconButton>
           </Grid>
           <Grid
             item
             xs={8}
+            md={6}
             flexDirection="row"
             flexWrap="nowrap"
             ref={refCallback}
@@ -213,8 +227,14 @@ const Home: NextPage = () => {
             ))}
           </Grid>
 
-          <Grid item xs={2}>
-            <ArrowForwardIosIcon />
+          <Grid item xs={2} md={3} display="flex" alignItems="center">
+            <IconButton
+              onClick={goForward}
+              disabled={currentSlide === 4}
+              sx={{ mx: "auto" }}
+            >
+              <ArrowForwardIosIcon />
+            </IconButton>
           </Grid>
           <Grid container>
             <Grid item xs={12}>

@@ -1,11 +1,10 @@
-import { LinkOutlined } from "@mui/icons-material";
 import {
+  Button,
   Card,
   CardActions,
   CardContent,
   CardMedia,
-  IconButton,
-  Typography
+  Typography,
 } from "@mui/material";
 import Image, { StaticImageData } from "next/image";
 import React from "react";
@@ -30,7 +29,8 @@ const CreativeCard = (props: CarouselCard) => {
     <Card
       key={props.heading}
       className={props.className}
-      sx={{maxWidth: "400px"}}
+      variant="outlined"
+      sx={{ maxWidth: "400px" }}
     >
       <CardMedia sx={{ width: "100%" }}>
         <Image
@@ -49,10 +49,15 @@ const CreativeCard = (props: CarouselCard) => {
           {props.body}
         </Typography>
       </CardContent>
-      <CardActions sx={{ pb: 1, pt: 0, pr: 10, flexFlow: "row-reverse" }}>
-        <IconButton aria-label="card-link" href={props.link}>
-          <LinkOutlined sx={{ fontSize: 25 }} />
-        </IconButton>
+      <CardActions sx={{ mt: 3 }}>
+        <Button
+          variant="outlined"
+          fullWidth
+          aria-label="card-link"
+          href={props.link}
+        >
+          Learn More!
+        </Button>
       </CardActions>
     </Card>
   );
