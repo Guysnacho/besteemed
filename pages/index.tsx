@@ -1,23 +1,31 @@
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import {
   Box,
   Card,
   CardContent,
   Grid,
+  IconButton,
   Link,
   Stack,
-  Typography
+  Typography,
+  useMediaQuery,
+  useTheme
 } from "@mui/material";
+import "keen-slider/keen-slider.min.css";
+import { useKeenSlider } from "keen-slider/react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
-import background from "../assets/banners/background.webp";
-import banner from "../assets/banners/banner-long.webp";
-import banner2 from "../assets/banners/banner2.webp";
-import banner4 from "../assets/banners/banner4.webp";
-import banner5 from "../assets/banners/banner5.webp";
+import { useState } from "react";
+import banner from "../assets/banners/banner-long.jpg";
+import banner2 from "../assets/banners/banner2.jpg";
+import banner3 from "../assets/banners/banner3.jpg";
+import banner5 from "../assets/banners/banner5.jpg";
+import banner6 from "../assets/banners/banner6.jpg";
+import blog2 from "../assets/banners/blog2.jpg";
 import CreativeCard from "../Components/Individual/CreativeCard";
-import ImageCollage from "../Components/Individual/ImageCollage";
 
 /**
  * @fileoverview Website homepage
@@ -33,13 +41,13 @@ const carouselData = [
     link: "/bookstore",
   },
   {
-    src: banner4,
+    src: banner3,
     heading: "Trailblazer",
     body: "This esteemed woman leads by example. This means marching with those she wants to protect and proving that anytihng is possible with enough passion and dedication!",
     link: "/esteemed",
   },
   {
-    src: background,
+    src: blog2,
     heading: "Motivational Speaker",
     body: "Through talks in person and online in the US and to Esteemed Woman groups across the globe, Bosede lifts people up and motivates them to chase their ideas and goals. Check out her outlets here!",
     link: "/esteemed",
@@ -59,6 +67,67 @@ const carouselData = [
 ];
 
 const Home: NextPage = () => {
+  //App state
+  const [currentSlide, setCurrentSlide] = useState(0); //Tracking the page of the pagination
+  const [refCallback, slider] = useKeenSlider(
+    {
+      initial: 0,
+      slides: carouselData.length,
+      slideChanged(slider) {
+        setCurrentSlide(slider.track.details.rel);
+      },
+      loop: true,
+      detailsChanged(s) {
+        const new_opacities = s.track.details.slides.map(
+          (slide) => slide.portion
+        );
+      },
+    },
+    [
+      (slider) => {
+        let timeout: ReturnType<typeof setTimeout>;
+        let mouseOver = false;
+        function clearNextTimeout() {
+          clearTimeout(timeout);
+        }
+        function nextTimeout() {
+          clearTimeout(timeout);
+          if (mouseOver) return;
+          timeout = setTimeout(() => {
+            slider.next();
+          }, 5000);
+        }
+        slider.on("created", () => {
+          slider.container.addEventListener("mouseover", () => {
+            mouseOver = true;
+            clearNextTimeout();
+          });
+          slider.container.addEventListener("mouseout", () => {
+            mouseOver = false;
+            nextTimeout();
+          });
+          nextTimeout();
+        });
+        slider.on("dragStarted", clearNextTimeout);
+        slider.on("animationEnded", nextTimeout);
+        slider.on("updated", nextTimeout);
+      },
+    ]
+  );
+  const theme = useTheme();
+
+  //Media query to check if we're below md viewport width
+  const matches = useMediaQuery(theme.breakpoints.down("md"));
+
+  // Functions
+  const goBack = (e: any) => {
+    e.stopPropagation() || slider.current?.prev();
+  };
+
+  const goForward = (e: any) => {
+    e.stopPropagation() || slider.current?.next();
+  };
+
   return (
     <>
       <Head>
@@ -72,57 +141,54 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <Grid container width="100%">
-          <Grid
-            container
-            component={Card}
-            elevation={3}
-            sx={{ borderRadius: 0 }}
-          >
-            <Grid item xs={12} md={8} width="100%" height="100%">
-              <ImageCollage />
-            </Grid>
-
-            <Grid
-              item
-              xs={12}
-              md={4}
-              sx={{ xs: { p: 3, height: "75%", my: "auto" }, md: { px: 0 } }}
+        <Grid container>
+          <Grid item xs={12}>
+            <Image
+              src={banner6}
+              alt="Bosede speaking"
+              layout="intrinsic"
+              objectPosition="0px"
+            />
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h2" textAlign="center" my={6}>
+              Bosede Adetunji
+            </Typography>
+          </Grid>
+          <Grid item xs={12} sx={{ xs: { p: 3, my: "auto" }, md: { px: 0 } }}>
+            <Card
+              sx={{
+                width: "60%",
+                mx: "auto",
+              }}
+              variant="outlined"
             >
-              <Card
-                sx={{
-                  width: "100%",
-                  my: "auto",
-                }}
-                variant="outlined"
-              >
-                <CardContent>
-                  <Typography variant="h6" textAlign="center">
-                    Bosede Adetunji
-                  </Typography>
-                  <Typography
-                    variant="body1"
-                    textAlign="justify"
-                    p={3}
-                    sx={{
-                      maxHeight: "20rem",
-                      textOverflow: "clip",
-                      overflow: "scroll",
-                      overflowX: "hidden",
-                      overflowY: "auto",
-                    }}
-                  >
-                    Bosede Adetunji is a Certified Life and Leadership Coach,
-                    Pastor, Author, Motivational Speaker, and empowerer of
-                    many. She was coached and certified under the direct
-                    leadership of the legendary John C. Maxwell. Bosede equips
-                    individuals and organizations with practical tools that
-                    enable them to break barriers, maximize their abilities, and
-                    amplify their success throughout all walks of life.
-                  </Typography>
-                </CardContent>
-              </Card>
-            </Grid>
+              <CardContent>
+                <Typography variant="h4" textAlign="center">
+                  An Esteemed Woman
+                </Typography>
+                <Typography
+                  variant="body1"
+                  textAlign="center"
+                  p={3}
+                  sx={{
+                    maxHeight: "20rem",
+                    textOverflow: "clip",
+                    overflow: "scroll",
+                    overflowX: "hidden",
+                    overflowY: "auto",
+                  }}
+                >
+                  Bosede Adetunji is a Certified Life and Leadership Coach,
+                  Pastor, Author, Motivational Speaker, and empowerer of many.
+                  She was coached and certified under the direct leadership of
+                  the legendary John C. Maxwell. Bosede equips individuals and
+                  organizations with practical tools that enable them to break
+                  barriers, maximize their abilities, and amplify their success
+                  throughout all walks of life.
+                </Typography>
+              </CardContent>
+            </Card>
           </Grid>
 
           <Grid item xs={12}>
@@ -131,16 +197,28 @@ const Home: NextPage = () => {
             </Typography>
           </Grid>
 
+          <Grid item xs={2} md={3} display="flex" alignItems="center">
+            <IconButton
+              onClick={goBack}
+              disabled={currentSlide === 0}
+              sx={{ mx: "auto" }}
+            >
+              <ArrowBackIosIcon />
+            </IconButton>
+          </Grid>
           <Grid
+            item
+            xs={8}
+            md={6}
             flexDirection="row"
-            spacing={5}
             flexWrap="nowrap"
-            container
+            ref={refCallback}
+            position="relative"
+            className="keen-slider"
             sx={{
-              overflowX: "scroll",
+              overflowX: "hidden",
               overflowY: "hidden",
               mb: 3,
-              p: [0, 4, 4, 4],
             }}
           >
             {carouselData.map((item) => (
@@ -150,8 +228,19 @@ const Home: NextPage = () => {
                 heading={item.heading}
                 body={item.body}
                 link={item.link}
+                className="keen-slider__slide"
               />
             ))}
+          </Grid>
+
+          <Grid item xs={2} md={3} display="flex" alignItems="center">
+            <IconButton
+              onClick={goForward}
+              disabled={currentSlide === 4}
+              sx={{ mx: "auto" }}
+            >
+              <ArrowForwardIosIcon />
+            </IconButton>
           </Grid>
           <Grid container>
             <Grid item xs={12}>
@@ -165,9 +254,9 @@ const Home: NextPage = () => {
               </Typography>
             </Grid>
             <Grid item xs={12} px={10} pb={4} mb={8}>
-              <Card elevation={3} sx={{ display: "flex" }}>
+              <Card elevation={3}>
                 <Stack
-                  direction="row"
+                  direction={matches ? "column" : "row"}
                   divider={
                     <FormatQuoteIcon color="primary" sx={{ opacity: "50%" }} />
                   }
@@ -175,7 +264,7 @@ const Home: NextPage = () => {
                   alignItems="center"
                   mb={-1}
                 >
-                  <Box width={"45%"}>
+                  <Box width={matches ? "100%" : "45%"}>
                     <Image
                       src={banner}
                       placeholder="blur"
@@ -183,22 +272,16 @@ const Home: NextPage = () => {
                       alt="Testimonial book picture"
                     />
                   </Box>
-                  <Box width={"45%"} pr={5}>
-                    <Typography variant="h6" textAlign="center">
+                  <Box width={matches ? "75%" : "45%"} pr={5}>
+                    <Typography variant="h6" textAlign="center" my={2}>
                       I highly recommend that all women should buy and read this
-                      book{" "}
+                      book
                     </Typography>
-                    <Typography
-                      variant="body1"
-                      textAlign="center"
-                      mt={2}
-                      px={4}
-                    >
-                      {" "}
-                      This book stands unique among all books written on
-                      women by various authors. In the Esteemed
-                      Woman, the author encourages women of all ages to rise up
-                      to fulfil their destiny because not...
+                    <Typography variant="body1" textAlign="center" mt={2}>
+                      This book stands unique among all books written on women
+                      by various authors. In the Esteemed Woman, the author
+                      encourages women of all ages to rise up to fulfil their
+                      destiny because not...
                     </Typography>
                     <Box textAlign="center" mt={2}>
                       <Link
@@ -217,7 +300,7 @@ const Home: NextPage = () => {
                       variant="subtitle1"
                       fontStyle="italic"
                       textAlign="center"
-                      mt={2}
+                      my={2}
                     >
                       Emmanuel Adegboye - May 21, 2018
                     </Typography>

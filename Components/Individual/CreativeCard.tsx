@@ -1,10 +1,9 @@
-import { LinkOutlined } from "@mui/icons-material";
 import {
+  Button,
   Card,
   CardActions,
   CardContent,
   CardMedia,
-  IconButton,
   Typography,
 } from "@mui/material";
 import Image, { StaticImageData } from "next/image";
@@ -16,6 +15,7 @@ export type CarouselCard = {
   heading: string;
   body: string;
   link: string;
+  className: string;
 };
 
 /**
@@ -28,9 +28,11 @@ const CreativeCard = (props: CarouselCard) => {
   return (
     <Card
       key={props.heading}
-      sx={{ maxWidth: 300, minWidth: 300, height: "100%", mx: 4 }}
+      className={props.className}
+      variant="outlined"
+      sx={{ maxWidth: "400px" }}
     >
-      <CardMedia sx={{ width: "100%", height: "auto" }}>
+      <CardMedia sx={{ width: "100%" }}>
         <Image
           alt={props.heading}
           src={props.src}
@@ -39,18 +41,23 @@ const CreativeCard = (props: CarouselCard) => {
           layout="responsive"
         />
       </CardMedia>
-      <CardContent sx={{ pb: 0, mb: -4 }}>
-        <Typography textAlign="center" variant="subtitle1" pt={1}>
+      <CardContent sx={{ pb: 0 }}>
+        <Typography textAlign="center" variant="h5" pt={1}>
           {props.heading}
         </Typography>
         <Typography variant="body2" p={1}>
-          {props.body}{" "}
+          {props.body}
         </Typography>
       </CardContent>
-      <CardActions sx={{ pb: 1, pt: 0, flexFlow: "row-reverse" }}>
-        <IconButton aria-label="card-link" href={props.link}>
-          <LinkOutlined sx={{ fontSize: 25 }} />
-        </IconButton>
+      <CardActions sx={{ mt: 3, mb: 1 }}>
+        <Button
+          variant="outlined"
+          fullWidth
+          aria-label="card-link"
+          href={props.link}
+        >
+          Learn More!
+        </Button>
       </CardActions>
     </Card>
   );

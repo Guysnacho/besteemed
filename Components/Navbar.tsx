@@ -43,7 +43,7 @@ const Navbar = () => {
       <Grid
         container
         direction="column"
-        sx={{ width: "100%", bgcolor: "background.paper" }}
+        sx={{ width: "100" }}
       >
         <Grid item xs={12}>
           <TopTab
