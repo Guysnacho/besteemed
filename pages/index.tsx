@@ -10,6 +10,8 @@ import {
   Link,
   Stack,
   Typography,
+  useMediaQuery,
+  useTheme
 } from "@mui/material";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
@@ -17,12 +19,12 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
-import background from "../assets/banners/background.webp";
-import banner from "../assets/banners/banner-long.webp";
-import banner2 from "../assets/banners/banner2.webp";
-import banner4 from "../assets/banners/banner4.webp";
-import banner5 from "../assets/banners/banner5.webp";
-import banner6 from "../assets/banners/banner6.webp";
+import banner from "../assets/banners/banner-long.jpg";
+import banner2 from "../assets/banners/banner2.jpg";
+import banner3 from "../assets/banners/banner3.jpg";
+import banner5 from "../assets/banners/banner5.jpg";
+import banner6 from "../assets/banners/banner6.jpg";
+import blog2 from "../assets/banners/blog2.jpg";
 import CreativeCard from "../Components/Individual/CreativeCard";
 
 /**
@@ -39,13 +41,13 @@ const carouselData = [
     link: "/bookstore",
   },
   {
-    src: banner4,
+    src: banner3,
     heading: "Trailblazer",
     body: "This esteemed woman leads by example. This means marching with those she wants to protect and proving that anytihng is possible with enough passion and dedication!",
     link: "/esteemed",
   },
   {
-    src: background,
+    src: blog2,
     heading: "Motivational Speaker",
     body: "Through talks in person and online in the US and to Esteemed Woman groups across the globe, Bosede lifts people up and motivates them to chase their ideas and goals. Check out her outlets here!",
     link: "/esteemed",
@@ -71,8 +73,8 @@ const Home: NextPage = () => {
     {
       initial: 0,
       slides: carouselData.length,
-      slideChanged() {
-        setCurrentSlide(slider.current.track.details.rel);
+      slideChanged(slider) {
+        setCurrentSlide(slider.track.details.rel);
       },
       loop: true,
       detailsChanged(s) {
@@ -112,6 +114,10 @@ const Home: NextPage = () => {
       },
     ]
   );
+  const theme = useTheme();
+
+  //Media query to check if we're below md viewport width
+  const matches = useMediaQuery(theme.breakpoints.down("md"));
 
   // Functions
   const goBack = (e: any) => {
@@ -135,7 +141,7 @@ const Home: NextPage = () => {
       </Head>
 
       <main>
-        <Grid container width="100%">
+        <Grid container>
           <Grid item xs={12}>
             <Image
               src={banner6}
@@ -145,7 +151,7 @@ const Home: NextPage = () => {
             />
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="h2" textAlign="center" my={4}>
+            <Typography variant="h2" textAlign="center" my={6}>
               Bosede Adetunji
             </Typography>
           </Grid>
@@ -248,9 +254,9 @@ const Home: NextPage = () => {
               </Typography>
             </Grid>
             <Grid item xs={12} px={10} pb={4} mb={8}>
-              <Card elevation={3} sx={{ display: "flex" }}>
+              <Card elevation={3}>
                 <Stack
-                  direction="row"
+                  direction={matches ? "column" : "row"}
                   divider={
                     <FormatQuoteIcon color="primary" sx={{ opacity: "50%" }} />
                   }
@@ -258,7 +264,7 @@ const Home: NextPage = () => {
                   alignItems="center"
                   mb={-1}
                 >
-                  <Box width={"45%"}>
+                  <Box width={matches ? "100%" : "45%"}>
                     <Image
                       src={banner}
                       placeholder="blur"
@@ -266,17 +272,12 @@ const Home: NextPage = () => {
                       alt="Testimonial book picture"
                     />
                   </Box>
-                  <Box width={"45%"} pr={5}>
-                    <Typography variant="h6" textAlign="center">
+                  <Box width={matches ? "75%" : "45%"} pr={5}>
+                    <Typography variant="h6" textAlign="center" my={2}>
                       I highly recommend that all women should buy and read this
-                      book{" "}
+                      book
                     </Typography>
-                    <Typography
-                      variant="body1"
-                      textAlign="center"
-                      mt={2}
-                      px={4}
-                    >
+                    <Typography variant="body1" textAlign="center" mt={2}>
                       This book stands unique among all books written on women
                       by various authors. In the Esteemed Woman, the author
                       encourages women of all ages to rise up to fulfil their
@@ -299,7 +300,7 @@ const Home: NextPage = () => {
                       variant="subtitle1"
                       fontStyle="italic"
                       textAlign="center"
-                      mt={2}
+                      my={2}
                     >
                       Emmanuel Adegboye - May 21, 2018
                     </Typography>

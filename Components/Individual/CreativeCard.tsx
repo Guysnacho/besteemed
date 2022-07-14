@@ -49,7 +49,7 @@ const CreativeCard = (props: CarouselCard) => {
           {props.body}
         </Typography>
       </CardContent>
-      <CardActions sx={{ mt: 3 }}>
+      <CardActions sx={{ mt: 3, mb: 1 }}>
         <Button
           variant="outlined"
           fullWidth

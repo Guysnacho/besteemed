@@ -12,7 +12,7 @@ import {
   Stack,
   Typography,
   useMediaQuery,
-  useTheme,
+  useTheme
 } from "@mui/material";
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -131,7 +131,11 @@ const Bookstore: NextPage = () => {
                 <Typography variant="h4" textAlign="center">
                   {bookData[page - 1].title}
                 </Typography>
-                <Typography variant="subtitle1" fontStyle="oblique" textAlign="center">
+                <Typography
+                  variant="subtitle1"
+                  fontStyle="oblique"
+                  textAlign="center"
+                >
                   {bookData[page - 1].subtitle}
                 </Typography>
                 <Typography variant="body1">

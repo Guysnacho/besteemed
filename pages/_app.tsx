@@ -2,7 +2,7 @@ import { CssBaseline } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
-import { ReactElement, ReactNode } from "react";
+import React, { ReactElement, ReactNode } from "react";
 import Layout from "../Components/Layout";
 import "../styles/globals.css";
 
@@ -86,12 +86,14 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
   return (
     <>
-      <CssBaseline /> {/*Reset css to a baseline for MUI*/}
-      <ThemeProvider theme={theme}>
-        <Layout>
-          <Component {...pageProps} />
-        </Layout>
-      </ThemeProvider>
+      <React.StrictMode>
+        <CssBaseline /> {/*Reset css to a baseline for MUI*/}
+        <ThemeProvider theme={theme}>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </ThemeProvider>
+      </React.StrictMode>
     </>
   );
 }
