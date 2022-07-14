@@ -1,5 +1,5 @@
-import Footer from "./Footer";
-import Navbar from "./Navbar";
+import Footer from "./Footer-new";
+import Navbar from "./Navbar-new";
 
 /**
  * @type {LayoutProps} - Pages that will be wrapped by the Navbar and Footer
