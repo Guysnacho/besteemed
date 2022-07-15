@@ -62,6 +62,7 @@ const CPR: NextPage = () => {
                 variant="contained"
                 size="large"
                 color="secondary"
+                aria-label="register for course"
                 href={cprlink}
                 sx={{ height: "28%" }}
               >
@@ -120,6 +121,7 @@ const CPR: NextPage = () => {
                 variant="contained"
                 size="large"
                 color="secondary"
+                aria-label="register for course"
                 href={cprlink}
               >
                 {/* eslint-disable-next-line react/no-unescaped-entities */}
