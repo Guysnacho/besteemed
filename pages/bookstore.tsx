@@ -41,7 +41,7 @@ const Bookstore: NextPage = () => {
     setPage(value);
   };
   return (
-    <div>
+    <>
       <Head>
         <title>Bookstore - Bosede Adetunji</title>
         <meta
@@ -149,7 +149,7 @@ const Bookstore: NextPage = () => {
           </Grid>
         </Grid>
       </main>
-    </div>
+    </>
   );
 };
 
