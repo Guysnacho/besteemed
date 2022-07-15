@@ -1,5 +1,6 @@
 import type { NextPage } from "next";
 import Head from "next/head";
+import UnderConstruction from "../Components/Individual/UnderConstruction";
 
 const Blog: NextPage = () => {
   return (
@@ -13,7 +14,9 @@ const Blog: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main></main>
+      <main>
+        <UnderConstruction />
+      </main>
     </div>
   );
 };

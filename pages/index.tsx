@@ -11,7 +11,7 @@ import {
   Stack,
   Typography,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from "@mui/material";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
