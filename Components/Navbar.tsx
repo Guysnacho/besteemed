@@ -1,10 +1,18 @@
 /**
  * @fileoverview Navigation bar of the website
  */
-import React, { useEffect, useState } from "react";
-import { Grid, Tabs, Tab } from "@mui/material";
-import { styled } from "@mui/material/styles";
+import {
+  Box,
+  Grid,
+  Paper,
+  Tab,
+  Tabs,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 
 /**
  * @function Navbar
@@ -13,11 +21,6 @@ import { useRouter } from "next/router";
 const Navbar = () => {
   const [page, setPage] = useState(0); //Track current page
   const router = useRouter(); // Router for switching pages in React
-
-  //Custom tabs with box shadow
-  const TopTab = styled(Tabs)({
-    boxShadow: "0 5px 5px 0 rgba(0, 0, 0, 0.05)",
-  });
 
   //Updates on click and reroutes to the selected page
   const handleChange = (event: React.SyntheticEvent, newPage: number) => {
@@ -38,28 +41,44 @@ const Navbar = () => {
     if (router.pathname == "/services") setPage(2);
   }, [router.pathname]);
 
+  //Media query to check if we're below md viewport width
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <>
       <Grid
         container
-        direction="column"
-        sx={{ width: "100" }}
+        sx={{
+          position: matches ? "sticky" : undefined,
+          top: matches ? 0 : undefined,
+        }}
       >
-        <Grid item xs={12}>
-          <TopTab
-            onChange={handleChange}
-            indicatorColor="primary"
-            variant="fullWidth"
-            value={page}
-            centered
-          >
-            <Tab label="Home" />
-            <Tab label="Bookstore" />
-            <Tab label="Esteemed Woman" />
-            <Tab label="Leadership" />
-            <Tab label="CPR Classes" />
-          </TopTab>
-        </Grid>
+        {matches ? (
+          <Grid item xs={12} zIndex={1000}>
+            <Paper sx={{ borderRadius: "0px" }}>
+              <Typography variant="h5" p={2}>
+                Bosede Adetunji
+              </Typography>
+            </Paper>
+          </Grid>
+        ) : (
+          <Grid item xs={12}>
+            <Tabs
+              onChange={handleChange}
+              indicatorColor="primary"
+              variant="standard"
+              value={page}
+              sx={{ boxShadow: "0 5px 5px 0 rgba(0, 0, 0, 0.05)" }}
+            >
+              <Tab label="Home" />
+              <Tab label="Bookstore" />
+              <Tab label="Esteemed Woman" />
+              <Tab label="Leadership" />
+              <Tab label="CPR Classes" />
+            </Tabs>
+          </Grid>
+        )}
       </Grid>
     </>
   );
