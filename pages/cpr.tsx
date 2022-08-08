@@ -46,13 +46,13 @@ const CPR: NextPage = () => {
               registered and accredited instructor!
             </Typography>
           </Grid>
-          <Grid item xs={12} md={8}>
+          <Grid item xs={12} md={8} pl={3}>
             <Box
               sx={{
                 background: `url("https://www.redcross.org/content/dam/redcross/training-services/category-pages/cpr/CPR-Desktop.jpg")`,
                 backgroundSize: "1366px 400px",
-                height: "100%",
-                borderRadius: "15px 0px 0px 15px",
+                height: "18rem",
+                borderRadius: "20px 0px 0px 20px",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",
@@ -64,7 +64,6 @@ const CPR: NextPage = () => {
                 color="secondary"
                 aria-label="register for course"
                 href={cprlink}
-                sx={{ height: "28%" }}
               >
                 Get in touch today!
               </Button>
@@ -111,7 +110,7 @@ const CPR: NextPage = () => {
                 background: `url("https://images.unsplash.com/photo-1630964046403-8b745c1e3c69?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1120&q=80")`,
                 backgroundSize: "1596px 1129px",
                 backgroundPosition: "0% 85%",
-                height: "15rem",
+                height: "18rem",
                 display: "flex",
                 justifyContent: "center",
                 alignItems: "center",

@@ -58,7 +58,7 @@ const Bookstore: NextPage = () => {
               variant="h3"
               textAlign="center"
               fontStyle="italic"
-              mx={15}
+              mx={8}
             >
               A Collection of Inspiring Books for Women Leaders
             </Typography>
