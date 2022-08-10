@@ -1,4 +1,5 @@
 import {
+  Box,
   Button,
   Card,
   CardActions,
@@ -33,12 +34,13 @@ const CreativeCard = (props: CarouselCard) => {
       sx={{ maxWidth: "400px" }}
     >
       <CardMedia sx={{ width: "100%" }}>
-        <Image
-          alt={props.heading}
-          src={props.src}
-          placeholder="blur"
-          blurDataURL={props.src.blurDataURL}
-          layout="responsive"
+        <Box
+          sx={{
+            background: `url(${props.src.src})`,
+            backgroundSize: 254 + "px " + 97 + "px",
+            backgroundRepeat: "no-repeat",
+            height: "97px"
+          }}
         />
       </CardMedia>
       <CardContent sx={{ pb: 0 }}>

@@ -143,15 +143,17 @@ const Home: NextPage = () => {
       <main>
         <Grid container>
           <Grid item xs={12}>
-            <Image
-              src={banner6}
-              alt="Bosede speaking"
-              layout="intrinsic"
-              objectPosition="0px"
+            <Box
+              sx={{
+                background: `url(${banner6.src})`,
+                backgroundSize: 1080 + "px " + 412 + "px",
+                backgroundPosition: "40% 45%",
+                height: "18rem",
+              }}
             />
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="h2" textAlign="center" my={6}>
+            <Typography variant="h4" textAlign="center" my={6}>
               Bosede Adetunji
             </Typography>
           </Grid>
