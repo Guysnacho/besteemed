@@ -4,6 +4,7 @@
 import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import {
+  Box,
   Card,
   CardActions,
   CardMedia,
@@ -12,11 +13,10 @@ import {
   Stack,
   Typography,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from "@mui/material";
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import { useState } from "react";
 import bookCover1 from "../assets/books/1Esteemed.webp";
 import bookCover2 from "../assets/books/2Leaders.webp";
@@ -32,16 +32,16 @@ const bookCovers = [bookCover1, bookCover2, bookCover3];
 const Bookstore: NextPage = () => {
   //App state
   const [page, setPage] = useState(1); //Tracking the page of the pagination
-  const theme = useTheme();
 
   //Media query to check if we're below md viewport width
+  const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
   };
   return (
-    <>
+    <div>
       <Head>
         <title>Bookstore - Bosede Adetunji</title>
         <meta
@@ -53,36 +53,45 @@ const Bookstore: NextPage = () => {
 
       <main>
         <Grid container>
-          <Grid item xs={12} my={4}>
+          <Grid item xs={12} mt={6}>
             <Typography
               variant="h3"
               textAlign="center"
               fontStyle="italic"
-              mx={8}
+              fontSize={matches ? "2.3rem" : undefined}
+              mx={matches ? 4 : 8}
             >
               A Collection of Inspiring Books for Women Leaders
             </Typography>
           </Grid>
-          <Grid container my={7} sx={!matches ? { mb: 15 } : {}}>
+          <Grid container my={5} sx={matches ? undefined : { mb: 15 }}>
             <Grid item xs={12} md={6} my="auto">
               <Card
                 sx={{
-                  width: "23rem",
+                  width: matches ? "18rem" : "23rem",
                   mx: "auto",
                   mb: 5,
                 }}
-                elevation={17}
+                elevation={13}
               >
-                <CardMedia
-                  sx={{ width: "100%", justifyContent: "space-around" }}
-                >
-                  <Image
-                    alt="Bosede Book"
-                    src={bookCovers[page - 1]}
-                    layout="responsive"
-                    objectPosition="top"
-                    loading="eager"
-                    priority
+                <CardMedia>
+                  <Box
+                    mt={3}
+                    sx={{
+                      background: `url(${bookCovers[page - 1].src})`,
+                      backgroundSize: matches
+                        ? bookCovers[page - 1].width * 0.75 +
+                          "px " +
+                          bookCovers[page - 1].height * 0.75 +
+                          "px"
+                        : bookCovers[page - 1].width +
+                          "px " +
+                          bookCovers[page - 1].height +
+                          "px",
+                      backgroundPosition: "50% 50%",
+                      backgroundRepeat: "no-repeat",
+                      height: matches ? "23rem" : bookCovers[page - 1].height,
+                    }}
                   />
                 </CardMedia>
                 <CardActions>
@@ -119,7 +128,7 @@ const Bookstore: NextPage = () => {
               </Stack>
             </Grid>
             <Grid item xs={12} md={6} mt={!matches ? undefined : 5}>
-              <Stack direction="column" spacing={3} sx={{ px: 7, mx: 5 }}>
+              <Stack direction="column" spacing={3} sx={{ px: 2, mx: 5 }}>
                 <Typography
                   variant="caption"
                   textAlign="center"
@@ -149,7 +158,7 @@ const Bookstore: NextPage = () => {
           </Grid>
         </Grid>
       </main>
-    </>
+    </div>
   );
 };
 

@@ -5,50 +5,41 @@ import MenuIcon from "@mui/icons-material/Menu";
 import {
   AppBar,
   Box,
+  Button,
   Container,
   Grid,
   IconButton,
   Menu,
   MenuItem,
-  Tab,
-  Tabs,
   Toolbar,
   Typography,
   useMediaQuery,
-  useTheme,
+  useTheme
 } from "@mui/material";
 import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+
+interface Props {
+  children: React.ReactElement;
+}
 
 /**
  * @function Navbar
  * @remarks Setting type for pages with a layout
  */
 const Navbar = () => {
-  const [page, setPage] = useState(0); //Track current page
   const router = useRouter(); // Router for switching pages in React
 
   const pages = ["Home", "Bookstore", "Esteemed Women", "Leadership", "CPR"];
   const links = ["/", "/bookstore", "/esteemed", "/leadership", "/cpr"];
 
-  //Updates on click and reroutes to the selected page
-  const handleChange = (event: React.SyntheticEvent, newPage: number) => {
-    event.preventDefault();
-    setPage(newPage);
-    if (newPage === 0) router.push("/");
-    if (newPage === 1) router.push("/bookstore");
-    if (newPage === 2) router.push("/esteemed");
-    if (newPage === 3) router.push("/leadership");
-    if (newPage === 4) router.push("/cpr");
-  };
+  //Media query to check if we're below md viewport width
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("md"));
 
   //Updates nav if we change page via a different link
   useEffect(() => {
     handleCloseNavMenu();
-    if (router.pathname == "/") setPage(0);
-    if (router.pathname == "/bookstore") setPage(1);
-    if (router.pathname == "/blog") setPage(2);
-    if (router.pathname == "/services") setPage(2);
   }, [router.pathname]);
 
   //Menu anchors for smaller screens
@@ -64,12 +55,8 @@ const Navbar = () => {
     setAnchorElNav(null);
   };
 
-  //Media query to check if we're below md viewport width
-  const theme = useTheme();
-  const matches = useMediaQuery(theme.breakpoints.down("md"));
-
   return (
-    <>
+    <div>
       <Grid
         container
         sx={{
@@ -93,7 +80,7 @@ const Navbar = () => {
                       onClick={handleOpenNavMenu}
                       color="inherit"
                     >
-                      <MenuIcon />
+                      <MenuIcon htmlColor="#fff" />
                     </IconButton>
                     <Menu
                       id="menu-appbar"
@@ -127,44 +114,60 @@ const Navbar = () => {
                       ))}
                     </Menu>
                   </Box>
-                  <Typography
-                    variant="button"
-                    noWrap
-                    component="a"
-                    href="/"
-                    sx={{
-                      mr: 2,
-                      display: { xs: undefined, md: "flex" },
-                      fontWeight: 700,
-                      letterSpacing: ".1rem",
-                      textDecoration: "none",
+                  <Button
+                    onClick={() => {
+                      router.push("/");
+                      handleCloseNavMenu();
                     }}
+                    sx={{ my: 2, display: "block" }}
                   >
-                    Bosede Adetunji
-                  </Typography>
+                    <Typography variant="h6" color="common.white">
+                      Bosede Adetunji
+                    </Typography>
+                  </Button>
                 </Toolbar>
               </Container>
             </AppBar>
           </Grid>
         ) : (
           <Grid item xs={12}>
-            <Tabs
-              onChange={handleChange}
-              indicatorColor="primary"
-              variant="standard"
-              value={page}
-              sx={{ boxShadow: "0 5px 5px 0 rgba(0, 0, 0, 0.05)" }}
-            >
-              <Tab label="Home" />
-              <Tab label="Bookstore" />
-              <Tab label="Esteemed Woman" />
-              <Tab label="Leadership" />
-              <Tab label="CPR Classes" />
-            </Tabs>
+            <AppBar position="static">
+              <Container maxWidth="xl">
+                <Toolbar disableGutters>
+                  <Button
+                    onClick={() => {
+                      router.push("/");
+                      handleCloseNavMenu();
+                    }}
+                    sx={{ my: 2, display: "block" }}
+                  >
+                    <Typography variant="h6" color="common.white">
+                      Bosede Adetunji
+                    </Typography>
+                  </Button>
+                  <Box
+                    sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
+                  >
+                    {pages.map((page) => (
+                      <Button
+                        key={page}
+                        onClick={() => {
+                          router.push(links[pages.indexOf(page)]);
+                          handleCloseNavMenu();
+                        }}
+                        sx={{ my: 2, color: "white", display: "block" }}
+                      >
+                        {page}
+                      </Button>
+                    ))}
+                  </Box>
+                </Toolbar>
+              </Container>
+            </AppBar>
           </Grid>
         )}
       </Grid>
-    </>
+    </div>
   );
 };
 export default Navbar;

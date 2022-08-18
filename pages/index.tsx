@@ -17,14 +17,13 @@ import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import { useState } from "react";
-import banner from "../assets/banners/banner-long.jpg";
-import banner2 from "../assets/banners/banner2.jpg";
-import banner3 from "../assets/banners/banner3.jpg";
-import banner5 from "../assets/banners/banner5.jpg";
-import banner6 from "../assets/banners/banner6.jpg";
-import blog2 from "../assets/banners/blog2.jpg";
+import banner from "../assets/banners/banner-long.webp";
+import banner2 from "../assets/banners/banner2.webp";
+import banner3 from "../assets/banners/banner3.webp";
+import banner5 from "../assets/banners/banner5.webp";
+import banner6 from "../assets/banners/banner6.webp";
+import blog2 from "../assets/banners/blog2.webp";
 import CreativeCard from "../Components/Individual/CreativeCard";
 
 /**
@@ -129,7 +128,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <>
+    <div>
       <Head>
         {/*Metadate of the page, optimize grid up top*/}
         <title>Home - Bosede Adetunji</title>
@@ -143,15 +142,19 @@ const Home: NextPage = () => {
       <main>
         <Grid container>
           <Grid item xs={12}>
-            <Image
-              src={banner6}
-              alt="Bosede speaking"
-              layout="intrinsic"
-              objectPosition="0px"
+            <Box
+              sx={{
+                background: `url(${banner6.src})`,
+                backgroundSize: matches
+                  ? 1080 * 0.8 + "px " + 412 * 0.8 + "px"
+                  : 1080 * 1.5 + "px " + 412 * 1.5 + "px",
+                backgroundPosition: "40% 45%",
+                height: matches ? "20rem" : "24rem",
+              }}
             />
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="h2" textAlign="center" my={6}>
+            <Typography variant="h4" textAlign="center" my={6}>
               Bosede Adetunji
             </Typography>
           </Grid>
@@ -164,13 +167,14 @@ const Home: NextPage = () => {
               variant="outlined"
             >
               <CardContent>
-                <Typography variant="h4" textAlign="center">
+                <Typography variant={matches ? "h6" : "h4"} textAlign="center">
                   An Esteemed Woman
                 </Typography>
                 <Typography
                   variant="body1"
+                  fontSize={matches ? ".9rem" : undefined}
                   textAlign="center"
-                  p={3}
+                  p={matches ? 1 : 3}
                   sx={{
                     maxHeight: "20rem",
                     textOverflow: "clip",
@@ -264,26 +268,44 @@ const Home: NextPage = () => {
                   alignItems="center"
                   mb={-1}
                 >
-                  <Box width={matches ? "100%" : "45%"}>
-                    <Image
-                      src={banner}
-                      placeholder="blur"
-                      layout="intrinsic"
-                      alt="Testimonial book picture"
-                    />
-                  </Box>
-                  <Box width={matches ? "75%" : "45%"} pr={5}>
-                    <Typography variant="h6" textAlign="center" my={2}>
+                  <Box
+                    width={matches ? "100%" : "50%"}
+                    sx={{
+                      background: `url(${banner.src})`,
+                      backgroundSize: matches
+                        ? 1080 * 0.4 + "px " + 412 * 0.4 + "px"
+                        : 1080 * 0.75 + "px " + 412 * 0.75 + "px",
+                      backgroundPosition: "40% 50%",
+                      backgroundRepeat: "no-repeat",
+                      height: matches ? "10rem" : "18.7rem",
+                    }}
+                  />
+                  <Box width="80%" pr={matches ? undefined : 5}>
+                    <Typography
+                      variant="h6"
+                      textAlign="center"
+                      my={2}
+                      fontSize={matches ? "1rem" : undefined}
+                    >
                       I highly recommend that all women should buy and read this
                       book
                     </Typography>
-                    <Typography variant="body1" textAlign="center" mt={2}>
+                    <Typography
+                      variant="body1"
+                      textAlign="center"
+                      mt={2}
+                      fontSize={matches ? ".9rem" : undefined}
+                    >
                       This book stands unique among all books written on women
                       by various authors. In the Esteemed Woman, the author
                       encourages women of all ages to rise up to fulfil their
                       destiny because not...
                     </Typography>
-                    <Box textAlign="center" mt={2}>
+                    <Box
+                      textAlign="center"
+                      mt={2}
+                      fontSize={matches ? ".9rem" : undefined}
+                    >
                       <Link
                         variant="body1"
                         textAlign="center"
@@ -292,6 +314,7 @@ const Home: NextPage = () => {
                         href="https://www.amazon.com/review/R26HU5DFZTWJYC/ref=cm_cr_srp_d_rdp_perm?ie=UTF8&ASIN=B07CVL5T68"
                         target="_blank"
                         rel="noopener"
+                        fontSize={matches ? ".9rem" : undefined}
                       >
                         Read the full review
                       </Link>
@@ -300,6 +323,7 @@ const Home: NextPage = () => {
                       variant="subtitle1"
                       fontStyle="italic"
                       textAlign="center"
+                      fontSize={matches ? ".85rem" : undefined}
                       my={2}
                     >
                       Emmanuel Adegboye - May 21, 2018
@@ -311,7 +335,7 @@ const Home: NextPage = () => {
           </Grid>
         </Grid>
       </main>
-    </>
+    </div>
   );
 };
 
