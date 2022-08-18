@@ -129,7 +129,7 @@ const Home: NextPage = () => {
   };
 
   return (
-    <>
+    <div>
       <Head>
         {/*Metadate of the page, optimize grid up top*/}
         <title>Home - Bosede Adetunji</title>
@@ -313,7 +313,7 @@ const Home: NextPage = () => {
           </Grid>
         </Grid>
       </main>
-    </>
+    </div>
   );
 };
 

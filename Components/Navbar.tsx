@@ -87,7 +87,7 @@ const Navbar = () => {
   };
 
   return (
-    <>
+    <div>
       <Grid
         container
         sx={{
@@ -199,23 +199,10 @@ const Navbar = () => {
                 </Container>
               </AppBar>
             </HideOnScroll>
-            <Tabs
-              onChange={handleChange}
-              indicatorColor="primary"
-              variant="standard"
-              value={page}
-              sx={{ boxShadow: "0 5px 5px 0 rgba(0, 0, 0, 0.05)" }}
-            >
-              <Tab label="Home" />
-              <Tab label="Bookstore" />
-              <Tab label="Esteemed Woman" />
-              <Tab label="Leadership" />
-              <Tab label="CPR Classes" />
-            </Tabs>
           </Grid>
         )}
       </Grid>
-    </>
+    </div>
   );
 };
 export default Navbar;

@@ -10,7 +10,7 @@ const CPR: NextPage = () => {
   const cprlink =
     "mailto:lilyinhishands@ymail.com?subject=CPR%20Training&body=Hello,%20my%20name%20is%20_______%20and%20I%20would%20like%20to%20sign%20up%20for%20a%20CPR%20training%20session.";
   return (
-    <>
+    <div>
       <Head>
         {/*Metadate of page*/}
         <title>CPR - Bosede Adetunji</title>
@@ -130,7 +130,7 @@ const CPR: NextPage = () => {
           </Grid>
         </Grid>
       </main>
-    </>
+    </div>
   );
 };
 

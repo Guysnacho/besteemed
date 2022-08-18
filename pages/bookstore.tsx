@@ -12,7 +12,7 @@ import {
   Stack,
   Typography,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from "@mui/material";
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -41,7 +41,7 @@ const Bookstore: NextPage = () => {
     setPage(value);
   };
   return (
-    <>
+    <div>
       <Head>
         <title>Bookstore - Bosede Adetunji</title>
         <meta
@@ -149,7 +149,7 @@ const Bookstore: NextPage = () => {
           </Grid>
         </Grid>
       </main>
-    </>
+    </div>
   );
 };
 
