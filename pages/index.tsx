@@ -19,12 +19,12 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
-import banner from "../assets/banners/banner-long.jpg";
-import banner2 from "../assets/banners/banner2.jpg";
-import banner3 from "../assets/banners/banner3.jpg";
-import banner5 from "../assets/banners/banner5.jpg";
-import banner6 from "../assets/banners/banner6.jpg";
-import blog2 from "../assets/banners/blog2.jpg";
+import banner from "../assets/banners/banner-long.webp";
+import banner2 from "../assets/banners/banner2.webp";
+import banner3 from "../assets/banners/banner3.webp";
+import banner5 from "../assets/banners/banner5.webp";
+import banner6 from "../assets/banners/banner6.webp";
+import blog2 from "../assets/banners/blog2.webp";
 import CreativeCard from "../Components/Individual/CreativeCard";
 
 /**
@@ -146,9 +146,12 @@ const Home: NextPage = () => {
             <Box
               sx={{
                 background: `url(${banner6.src})`,
-                backgroundSize: 1080 + "px " + 412 + "px",
+                backgroundSize: matches
+                  ? 1080 * 0.8 + "px " + 412 * 0.8 + "px"
+                  : 1080 * 1.5 + "px " + 412 * 1.5 + "px",
                 backgroundPosition: "40% 45%",
-                height: "18rem",
+                height: matches ? "20rem" : "24rem",
+                xs: {},
               }}
             />
           </Grid>

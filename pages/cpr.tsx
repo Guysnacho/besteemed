@@ -49,7 +49,7 @@ const CPR: NextPage = () => {
           <Grid item xs={12} md={8} pl={3}>
             <Box
               sx={{
-                background: `url("https://www.redcross.org/content/dam/redcross/training-services/category-pages/cpr/CPR-Desktop.jpg")`,
+                background: `url("https://www.redcross.org/content/dam/redcross/training-services/category-pages/cpr/CPR-Desktop.webp")`,
                 backgroundSize: "1366px 400px",
                 height: "18rem",
                 borderRadius: "20px 0px 0px 20px",

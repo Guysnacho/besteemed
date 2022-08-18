@@ -1,8 +1,8 @@
 import { ImageList, ImageListItem } from "@mui/material";
-import banner1 from "../../assets/banners/banner-long.jpg";
-import banner2 from "../../assets/banners/banner2.jpg";
-import banner3 from "../../assets/banners/banner3.jpg";
-import banner6 from "../../assets/banners/banner6.jpg";
+import banner1 from "../../assets/banners/banner-long.webp";
+import banner2 from "../../assets/banners/banner2.webp";
+import banner3 from "../../assets/banners/banner3.webp";
+import banner6 from "../../assets/banners/banner6.webp";
 import React from "react";
 import Image from "next/image";
 

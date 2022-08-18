@@ -19,7 +19,6 @@ const Footer = () => {
     theme.palette.primary.dark
   );
   const matches = useMediaQuery(theme.breakpoints.down("md"));
-  const matchesSm = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
     <Grid
