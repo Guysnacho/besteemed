@@ -6,8 +6,10 @@ import {
   CardContent,
   CardMedia,
   Typography,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
-import Image, { StaticImageData } from "next/image";
+import { StaticImageData } from "next/image";
 import React from "react";
 
 //Consistent typing for properties
@@ -26,6 +28,10 @@ export type CarouselCard = {
  *
  */
 const CreativeCard = (props: CarouselCard) => {
+  //Media query to check if we're below md viewport width
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <Card
       key={props.heading}
@@ -37,9 +43,12 @@ const CreativeCard = (props: CarouselCard) => {
         <Box
           sx={{
             background: `url(${props.src.src})`,
-            backgroundSize: 254 + "px " + 97 + "px",
+            backgroundSize: matches
+              ? 254 * 1.4 + "px " + 97 * 1.4 + "px"
+              : 254 * 2 + "px " + 97 * 2 + "px",
+            backgroundPosition: "50% 50%",
             backgroundRepeat: "no-repeat",
-            height: "97px"
+            height: matches ? "8rem" : "10rem",
           }}
         />
       </CardMedia>
@@ -47,7 +56,11 @@ const CreativeCard = (props: CarouselCard) => {
         <Typography textAlign="center" variant="h5" pt={1}>
           {props.heading}
         </Typography>
-        <Typography variant="body2" p={1}>
+        <Typography
+          variant="body2"
+          p={1}
+          fontSize={matches ? ".9rem" : undefined}
+        >
           {props.body}
         </Typography>
       </CardContent>

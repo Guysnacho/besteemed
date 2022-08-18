@@ -151,7 +151,6 @@ const Home: NextPage = () => {
                   : 1080 * 1.5 + "px " + 412 * 1.5 + "px",
                 backgroundPosition: "40% 45%",
                 height: matches ? "20rem" : "24rem",
-                xs: {},
               }}
             />
           </Grid>
@@ -169,13 +168,14 @@ const Home: NextPage = () => {
               variant="outlined"
             >
               <CardContent>
-                <Typography variant="h4" textAlign="center">
+                <Typography variant={matches ? "h6" : "h4"} textAlign="center">
                   An Esteemed Woman
                 </Typography>
                 <Typography
                   variant="body1"
+                  fontSize={matches ? ".9rem" : undefined}
                   textAlign="center"
-                  p={3}
+                  p={matches ? 1 : 3}
                   sx={{
                     maxHeight: "20rem",
                     textOverflow: "clip",
@@ -269,26 +269,30 @@ const Home: NextPage = () => {
                   alignItems="center"
                   mb={-1}
                 >
-                  <Box width={matches ? "100%" : "45%"}>
-                    <Image
-                      src={banner}
-                      placeholder="blur"
-                      layout="intrinsic"
-                      alt="Testimonial book picture"
-                    />
-                  </Box>
-                  <Box width={matches ? "75%" : "45%"} pr={5}>
-                    <Typography variant="h6" textAlign="center" my={2}>
+                  <Box
+                    width={matches ? "100%" : "50%"}
+                    sx={{
+                      background: `url(${banner.src})`,
+                      backgroundSize: matches
+                        ? 1080 * 0.4 + "px " + 412 * 0.4 + "px"
+                        : 1080 * 0.75 + "px " + 412 * 0.75 + "px",
+                      backgroundPosition: "40% 50%",
+                      backgroundRepeat: "no-repeat",
+                      height: matches ? "10rem" : "18.7rem",
+                    }}
+                  />
+                  <Box width="80%" pr={matches ? undefined : 5}>
+                    <Typography variant="h6" textAlign="center" my={2} fontSize={matches ? "1rem" : undefined}>
                       I highly recommend that all women should buy and read this
                       book
                     </Typography>
-                    <Typography variant="body1" textAlign="center" mt={2}>
+                    <Typography variant="body1" textAlign="center" mt={2} fontSize={matches ? ".9rem" : undefined}>
                       This book stands unique among all books written on women
                       by various authors. In the Esteemed Woman, the author
                       encourages women of all ages to rise up to fulfil their
                       destiny because not...
                     </Typography>
-                    <Box textAlign="center" mt={2}>
+                    <Box textAlign="center" mt={2} fontSize={matches ? ".9rem" : undefined}>
                       <Link
                         variant="body1"
                         textAlign="center"
@@ -297,6 +301,7 @@ const Home: NextPage = () => {
                         href="https://www.amazon.com/review/R26HU5DFZTWJYC/ref=cm_cr_srp_d_rdp_perm?ie=UTF8&ASIN=B07CVL5T68"
                         target="_blank"
                         rel="noopener"
+                        fontSize={matches ? ".9rem" : undefined}
                       >
                         Read the full review
                       </Link>
@@ -305,6 +310,7 @@ const Home: NextPage = () => {
                       variant="subtitle1"
                       fontStyle="italic"
                       textAlign="center"
+                      fontSize={matches ? ".85rem" : undefined}
                       my={2}
                     >
                       Emmanuel Adegboye - May 21, 2018

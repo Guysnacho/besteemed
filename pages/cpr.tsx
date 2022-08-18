@@ -2,13 +2,25 @@
  * @fileoverview CPR class promo page
  */
 
-import { Box, Button, Grid, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  Typography,
+  useMediaQuery,
+  useTheme,
+} from "@mui/material";
 import type { NextPage } from "next";
 import Head from "next/head";
 
+const cprlink =
+  "mailto:lilyinhishands@ymail.com?subject=CPR%20Training&body=Hello,%20my%20name%20is%20_______%20and%20I%20would%20like%20to%20sign%20up%20for%20a%20CPR%20training%20session.";
+
 const CPR: NextPage = () => {
-  const cprlink =
-    "mailto:lilyinhishands@ymail.com?subject=CPR%20Training&body=Hello,%20my%20name%20is%20_______%20and%20I%20would%20like%20to%20sign%20up%20for%20a%20CPR%20training%20session.";
+  //Media query to check if we're below md viewport width
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.down("md"));
+
   return (
     <div>
       <Head>
@@ -35,10 +47,10 @@ const CPR: NextPage = () => {
             </Typography>
           </Grid>
           <Grid item xs={12} md={4} mb={2}>
-            <Typography variant="h5" textAlign="center" px={2}>
+            <Typography variant="h5" textAlign="center">
               Save a Life
             </Typography>
-            <Typography variant="body1" textAlign="center" px={2}>
+            <Typography variant="body1" textAlign="center" px={5}>
               There are many reasons why one would want to get a CPR
               certification. Having this vital skill can be the difference
               between a life lost and and a life saved. Whether you are renewing
@@ -49,8 +61,11 @@ const CPR: NextPage = () => {
           <Grid item xs={12} md={8} pl={3}>
             <Box
               sx={{
-                background: `url("https://www.redcross.org/content/dam/redcross/training-services/category-pages/cpr/CPR-Desktop.webp")`,
-                backgroundSize: "1366px 400px",
+                background: `url("https://images.pexels.com/photos/11655091/pexels-photo-11655091.jpeg")`,
+                backgroundSize: matches
+                  ? 422 + "px " + 634 + "px"
+                  : 422 * 1.75 + "px " + 634 * 1.75 + "px",
+                backgroundPosition: "50%",
                 height: "18rem",
                 borderRadius: "20px 0px 0px 20px",
                 display: "flex",
