@@ -13,7 +13,7 @@ import {
   Stack,
   Typography,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from "@mui/material";
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -32,7 +32,7 @@ const bookCovers = [bookCover1, bookCover2, bookCover3];
 const Bookstore: NextPage = () => {
   //App state
   const [page, setPage] = useState(1); //Tracking the page of the pagination
-  
+
   //Media query to check if we're below md viewport width
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));

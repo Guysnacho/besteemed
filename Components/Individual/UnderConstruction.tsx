@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import ConstructionIcon from "@mui/icons-material/Construction";
 import { Grid, Typography } from "@mui/material";
 

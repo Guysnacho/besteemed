@@ -36,7 +36,13 @@ const Footer = () => {
           "rgba(50, 50, 93, 0.1) 0px 3px 30px -12px inset, rgba(0, 0, 0, 0.3) 0px 9px 18px -9px inset",
       }}
     >
-      <Grid item xs={12} md={4} justifyContent={matches ? "center" : undefined} my={matches ? 1 : "auto"}>
+      <Grid
+        item
+        xs={12}
+        md={4}
+        justifyContent={matches ? "center" : undefined}
+        my={matches ? 1 : "auto"}
+      >
         <Typography my={2} display="flex" justifyContent="space-evenly">
           Made with ❤ by Tunji Productions
         </Typography>

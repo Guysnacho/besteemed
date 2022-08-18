@@ -17,7 +17,6 @@ import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
 import type { NextPage } from "next";
 import Head from "next/head";
-import Image from "next/image";
 import { useState } from "react";
 import banner from "../assets/banners/banner-long.webp";
 import banner2 from "../assets/banners/banner2.webp";
@@ -282,17 +281,31 @@ const Home: NextPage = () => {
                     }}
                   />
                   <Box width="80%" pr={matches ? undefined : 5}>
-                    <Typography variant="h6" textAlign="center" my={2} fontSize={matches ? "1rem" : undefined}>
+                    <Typography
+                      variant="h6"
+                      textAlign="center"
+                      my={2}
+                      fontSize={matches ? "1rem" : undefined}
+                    >
                       I highly recommend that all women should buy and read this
                       book
                     </Typography>
-                    <Typography variant="body1" textAlign="center" mt={2} fontSize={matches ? ".9rem" : undefined}>
+                    <Typography
+                      variant="body1"
+                      textAlign="center"
+                      mt={2}
+                      fontSize={matches ? ".9rem" : undefined}
+                    >
                       This book stands unique among all books written on women
                       by various authors. In the Esteemed Woman, the author
                       encourages women of all ages to rise up to fulfil their
                       destiny because not...
                     </Typography>
-                    <Box textAlign="center" mt={2} fontSize={matches ? ".9rem" : undefined}>
+                    <Box
+                      textAlign="center"
+                      mt={2}
+                      fontSize={matches ? ".9rem" : undefined}
+                    >
                       <Link
                         variant="body1"
                         textAlign="center"

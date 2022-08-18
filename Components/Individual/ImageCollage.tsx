@@ -1,10 +1,9 @@
 import { ImageList, ImageListItem } from "@mui/material";
+import Image from "next/image";
 import banner1 from "../../assets/banners/banner-long.webp";
 import banner2 from "../../assets/banners/banner2.webp";
 import banner3 from "../../assets/banners/banner3.webp";
 import banner6 from "../../assets/banners/banner6.webp";
-import React from "react";
-import Image from "next/image";
 
 const imageData = [
   {
@@ -45,7 +44,7 @@ function srcset(image: string, size: number, rows = 1, cols = 1) {
 
 /**
  * @fileoverview Image collage with different aspects of Bosede
- * @returns 
+ * @returns
  */
 const ImageCollage = () => {
   return (
