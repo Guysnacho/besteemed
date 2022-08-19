@@ -33,7 +33,7 @@ const Navbar = () => {
   const pages = [
     "Home",
     "Bookstore",
-    "The Esteemed Women",
+    "The Esteemed Woman",
     "Leadership",
     "CPR",
   ];
