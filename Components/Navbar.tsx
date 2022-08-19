@@ -14,7 +14,7 @@ import {
   Toolbar,
   Typography,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
@@ -30,7 +30,13 @@ interface Props {
 const Navbar = () => {
   const router = useRouter(); // Router for switching pages in React
 
-  const pages = ["Home", "Bookstore", "Esteemed Women", "Leadership", "CPR"];
+  const pages = [
+    "Home",
+    "Bookstore",
+    "The Esteemed Women",
+    "Leadership",
+    "CPR",
+  ];
   const links = ["/", "/bookstore", "/esteemed", "/leadership", "/cpr"];
 
   //Media query to check if we're below md viewport width
@@ -122,7 +128,7 @@ const Navbar = () => {
                     sx={{ my: 2, display: "block" }}
                   >
                     <Typography variant="h6" color="common.white">
-                      Bosede Adetunji
+                      The Esteemed Woman
                     </Typography>
                   </Button>
                 </Toolbar>
@@ -142,7 +148,7 @@ const Navbar = () => {
                     sx={{ my: 2, display: "block" }}
                   >
                     <Typography variant="h6" color="common.white">
-                      Bosede Adetunji
+                      The Esteemed Woman
                     </Typography>
                   </Button>
                   <Box

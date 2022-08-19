@@ -184,12 +184,13 @@ const Home: NextPage = () => {
                   }}
                 >
                   Bosede Adetunji is a Certified Life and Leadership Coach,
-                  Pastor, Author, Motivational Speaker, and empowerer of many.
-                  She was coached and certified under the direct leadership of
-                  the legendary John C. Maxwell. Bosede equips individuals and
-                  organizations with practical tools that enable them to break
-                  barriers, maximize their abilities, and amplify their success
-                  throughout all walks of life.
+                  Pastor, Author, Motivational Speaker, and empowerer of many as
+                  the convener of the Esteemed Woman. She was coached and
+                  certified under the direct leadership of the legendary John C.
+                  Maxwell. Bosede equips individuals and organizations with
+                  practical tools that enable them to break barriers, maximize
+                  their abilities, and amplify their success throughout all
+                  walks of life.
                 </Typography>
               </CardContent>
             </Card>
