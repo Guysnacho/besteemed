@@ -34,10 +34,11 @@ const Navbar = () => {
     "Home",
     "Bookstore",
     "The Esteemed Woman",
+    "Excursions",
     "Leadership",
     "CPR",
   ];
-  const links = ["/", "/bookstore", "/esteemed", "/leadership", "/cpr"];
+  const links = ["/", "/bookstore", "/esteemed", "/excursions", "/leadership", "/cpr"];
 
   //Media query to check if we're below md viewport width
   const theme = useTheme();
