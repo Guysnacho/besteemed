@@ -43,7 +43,12 @@ const Footer = () => {
         justifyContent={matches ? "center" : undefined}
         my={matches ? 1 : "auto"}
       >
-        <Typography my={2} display="flex" justifyContent="space-evenly">
+        <Typography
+          my={2}
+          display="flex"
+          justifyContent="space-evenly"
+          textAlign={matches ? "center" : undefined}
+        >
           Made with ❤ by Tunji Productions
         </Typography>
       </Grid>
