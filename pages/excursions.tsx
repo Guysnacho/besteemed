@@ -19,6 +19,7 @@ import {
 } from "@mui/material";
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useRouter } from "next/router";
 import { useState } from "react";
 /**
  * @returns {NextPage} - A Nextjs Page
@@ -32,6 +33,8 @@ const Excursions: NextPage = () => {
   //Media query to check if we're below md viewport width
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
+
+  const router = useRouter();
 
   return (
     <div>
@@ -164,7 +167,7 @@ const Excursions: NextPage = () => {
                     sx={{ mx: 4 }}
                     aria-label="Israel excursion"
                     href=""
-                    onClick={() => alert("You wanna go to Israel I seeeeee 🇮🇱")}
+                    onClick={() => router.replace("/excursions/#Israel")}
                   >
                     Experience Israel
                   </Button>
@@ -195,7 +198,9 @@ const Excursions: NextPage = () => {
                     sx={{ mx: 4 }}
                     aria-label="Jordan excursion"
                     href=""
-                    onClick={() => alert("You wanna go to Jordan I seeeeee")}
+                    onClick={() =>
+                      router.replace("/excursions/#Jordan")
+                    }
                   >
                     Experience Jordan
                   </Button>
@@ -226,7 +231,9 @@ const Excursions: NextPage = () => {
                     sx={{ mx: 4 }}
                     aria-label="Cruise excursion"
                     href=""
-                    onClick={() => alert("You wanna go on a lil boat I seee")}
+                    onClick={() =>
+                      router.replace("/excursions/#Oversea")
+                    }
                   >
                     Sea Excursion
                   </Button>
@@ -235,7 +242,12 @@ const Excursions: NextPage = () => {
             </Container>
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="h4" textAlign="center" my={2}>
+            <Typography
+              variant="h4"
+              textAlign="center"
+              my={2}
+              id="Israel"
+            >
               Israel
             </Typography>
           </Grid>
@@ -290,7 +302,12 @@ const Excursions: NextPage = () => {
             </Card>
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="h4" textAlign="center" my={2}>
+            <Typography
+              variant="h4"
+              textAlign="center"
+              my={2}
+              id="Jordan"
+            >
               Jordan
             </Typography>
           </Grid>
@@ -345,7 +362,12 @@ const Excursions: NextPage = () => {
             </Paper>
           </Grid>
           <Grid item xs={12}>
-            <Typography variant="h4" textAlign="center" my={2}>
+            <Typography
+              variant="h4"
+              textAlign="center"
+              my={2}
+              id="Oversea"
+            >
               Oversea Cruise
             </Typography>
             <Paper
@@ -368,7 +390,7 @@ const Excursions: NextPage = () => {
             </Paper>
           </Grid>
           <Grid item xs={12}>
-            <Box overflow="hidden" mb={-3.7} sx={{transform: "scale(-1,1)"}}>
+            <Box overflow="hidden" mb={-3.7} sx={{ transform: "scale(-1,1)" }}>
               <svg
                 id="visual"
                 viewBox="0 0 2160 100"
