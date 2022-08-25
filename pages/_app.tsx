@@ -83,7 +83,6 @@ const theme = createTheme({
  * @remarks Setting type for pages with a layout
  */
 function MyApp({ Component, pageProps }: AppPropsWithLayout) {
-  const getLayout = Component.getLayout ?? ((page) => page);
   return (
     <>
       <React.StrictMode>
