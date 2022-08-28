@@ -16,6 +16,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useEffect } from "react";
 import Iframe from "react-iframe";
+import "../assets/embed";
 
 const Blog: NextPage = () => {
   //Media query to check if we're below md viewport width
@@ -130,6 +131,7 @@ const Blog: NextPage = () => {
           </Grid>
           <Grid item xs={12} md={7} my={4}>
             <Container>
+              <script async src="https://www.tiktok.com/embed.js"></script>
               <blockquote
                 className="tiktok-embed"
                 cite="https://www.tiktok.com/@bosedeadetunji3"
@@ -185,30 +187,25 @@ const Blog: NextPage = () => {
             >
               {matches ? (
                 <Paper sx={{ m: 0, p: 0 }} elevation={4}>
-                  <iframe
-                    src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fphoto%2F%3Ffbid%3D1993407140816069%26set%3Da.234062453417222&show_text=true&width=225"
-                    width="225"
-                    height="197"
-                    style={{
-                      border: "none",
-                    }}
-                    scrolling="yes"
+                  <Iframe
                     frameBorder={0}
-                    allowFullScreen
-                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  ></iframe>
+                    width="225px"
+                    height="197px"
+                    url="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fphoto%2F%3Ffbid%3D1993407140816069%26set%3Da.234062453417222&show_text=true&width=225"
+                    title="TikTok Page"
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; fullscreen"
+                  />
                 </Paper>
               ) : (
                 <Paper sx={{ m: 0, p: 0 }} elevation={4}>
-                  <iframe
-                    src="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fphoto%2F%3Ffbid%3D1993407140816069%26set%3Da.234062453417222&show_text=true&width=500"
-                    width="500"
-                    height="437"
-                    scrolling="no"
+                  <Iframe
                     frameBorder={0}
-                    allowFullScreen
-                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-                  ></iframe>
+                    width="500px"
+                    height="437px"
+                    url="https://www.facebook.com/plugins/post.php?href=https%3A%2F%2Fwww.facebook.com%2Fphoto%2F%3Ffbid%3D1993407140816069%26set%3Da.234062453417222&show_text=true&width=500"
+                    title="TikTok Page"
+                    allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share; fullscreen"
+                  />
                 </Paper>
               )}
             </Box>
