@@ -23,17 +23,6 @@ const Blog: NextPage = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
 
-  // Component Functions - import TikTok css
-  useEffect(() => {
-    var styles = "@import url('https://www.tiktok.com/embed.js');";
-    var newSS = document.createElement("link");
-    newSS.rel = "stylesheet";
-    newSS.href = "data:text/css," + escape(styles);
-    document.getElementsByTagName("head")[0].appendChild(newSS);
-
-    ("Imported TikTok CSS");
-  });
-
   return (
     <div>
       <Head>
