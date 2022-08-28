@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import type { NextPage } from "next";
 import Head from "next/head";
-import { useEffect } from "react";
+import Script from "next/script";
 import Iframe from "react-iframe";
 import "../assets/embed";
 
@@ -33,6 +33,11 @@ const Blog: NextPage = () => {
         />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      <Script
+        src="https://www.tiktok.com/embed.js?t=1645275849920"
+        id="tiktok-embed-script"
+        async
+      />
 
       <main>
         <Grid container>
@@ -120,7 +125,6 @@ const Blog: NextPage = () => {
           </Grid>
           <Grid item xs={12} md={7} my={4}>
             <Container>
-              <script async src="https://www.tiktok.com/embed.js"></script>
               <blockquote
                 className="tiktok-embed"
                 cite="https://www.tiktok.com/@bosedeadetunji3"
