@@ -390,7 +390,7 @@ const Excursions: NextPage = () => {
             </Paper>
           </Grid>
           <Grid item xs={12}>
-            <Box overflow="hidden" mb={-3.7} sx={{ transform: "scale(-1,1)" }}>
+            <Box overflow="hidden" mb={-3.75} sx={{ transform: "scale(-1,1)" }}>
               <svg
                 id="visual"
                 viewBox="0 0 2160 100"
