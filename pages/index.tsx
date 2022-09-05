@@ -176,7 +176,7 @@ const Home: NextPage = () => {
                   textAlign="center"
                   p={matches ? 1 : 3}
                   sx={{
-                    maxHeight: "20rem",
+                    maxHeight: "15rem",
                     textOverflow: "clip",
                     overflow: "scroll",
                     overflowX: "hidden",

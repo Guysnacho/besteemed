@@ -63,9 +63,9 @@ const CPR: NextPage = () => {
               sx={{
                 background: `url("https://images.pexels.com/photos/11655091/pexels-photo-11655091.jpeg")`,
                 backgroundSize: matches
-                  ? 422 + "px " + 634 + "px"
-                  : 422 * 1.75 + "px " + 634 * 1.75 + "px",
-                backgroundPosition: "50%",
+                  ? 422 * 1 + "px " + 634 * 1 + "px"
+                  : 422 * 2.35 + "px " + 634 * 2.35 + "px",
+                backgroundPosition: "50% 45%",
                 height: "18rem",
                 borderRadius: "20px 0px 0px 20px",
                 display: "flex",
