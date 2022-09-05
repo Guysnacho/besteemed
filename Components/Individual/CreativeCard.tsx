@@ -10,7 +10,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { StaticImageData } from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
 //Consistent typing for properties
 export type CarouselCard = {
@@ -28,6 +28,9 @@ export type CarouselCard = {
  *
  */
 const CreativeCard = (props: CarouselCard) => {
+  //App state
+  const [hover, setHover] = useState(false);
+
   //Media query to check if we're below md viewport width
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
@@ -37,7 +40,7 @@ const CreativeCard = (props: CarouselCard) => {
       key={props.heading}
       className={props.className}
       variant="outlined"
-      sx={{ maxWidth: "400px" }}
+      sx={{ width: matches ? "65vw" : "40vw", mx: "auto", pb: 2 }}
     >
       <CardMedia sx={{ width: "100%" }}>
         <Box
