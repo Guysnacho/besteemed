@@ -19,10 +19,6 @@ import {
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
 
-interface Props {
-  children: React.ReactElement;
-}
-
 /**
  * @function Navbar
  * @remarks Setting type for pages with a layout
@@ -38,7 +34,14 @@ const Navbar = () => {
     "Leadership",
     "CPR",
   ];
-  const links = ["/", "/bookstore", "/esteemed", "/excursions", "/leadership", "/cpr"];
+  const links = [
+    "/",
+    "/bookstore",
+    "/esteemed",
+    "/excursions",
+    "/leadership",
+    "/cpr",
+  ];
 
   //Media query to check if we're below md viewport width
   const theme = useTheme();
@@ -137,7 +140,11 @@ const Navbar = () => {
             </AppBar>
           </Grid>
         ) : (
-          <Grid item xs={12}>
+          <Grid
+            item
+            xs={12}
+            sx={{ flexGrow: router.pathname === "/admin" ? 1 : undefined }}
+          >
             <AppBar position="static">
               <Container maxWidth="xl">
                 <Toolbar disableGutters>
@@ -153,20 +160,39 @@ const Navbar = () => {
                     </Typography>
                   </Button>
                   <Box
-                    sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
+                    sx={{
+                      flexGrow: 1,
+                      display: { xs: "none", md: "flex" },
+                      flexDirection:
+                        router.pathname === "/admin"
+                          ? "row-reverse"
+                          : undefined,
+                    }}
                   >
-                    {pages.map((page) => (
+                    {router.pathname === "/admin" ? (
                       <Button
-                        key={page}
                         onClick={() => {
-                          router.push(links[pages.indexOf(page)]);
+                          router.push("/");
                           handleCloseNavMenu();
                         }}
                         sx={{ my: 2, color: "white", display: "block" }}
                       >
-                        {page}
+                        Sign Out
                       </Button>
-                    ))}
+                    ) : (
+                      pages.map((page) => (
+                        <Button
+                          key={page}
+                          onClick={() => {
+                            router.push(links[pages.indexOf(page)]);
+                            handleCloseNavMenu();
+                          }}
+                          sx={{ my: 2, color: "white", display: "block" }}
+                        >
+                          {page}
+                        </Button>
+                      ))
+                    )}
                   </Box>
                 </Toolbar>
               </Container>
