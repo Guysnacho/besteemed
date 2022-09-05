@@ -13,6 +13,8 @@
     "@emotion/styled": "^11.8.1",
     "@mui/icons-material": "^5.8.0",
     "@mui/material": "^5.8.1",
+    "@reduxjs/toolkit": "^1.8.5",
+    "@supabase/supabase-js": "^1.35.6",
     "keen-slider": "^6.7.0",
     "next": "12.1.6",
     "react": "18.1.0",
