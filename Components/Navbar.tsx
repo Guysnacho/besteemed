@@ -18,6 +18,8 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
+import { useAppDispatch } from "../redux/hooks";
+import { logout } from "../redux/userSlice";
 
 /**
  * @function Navbar
@@ -46,6 +48,7 @@ const Navbar = () => {
   //Media query to check if we're below md viewport width
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
+  const dispatch = useAppDispatch(); // Sends actions to redux
 
   //Updates nav if we change page via a different link
   useEffect(() => {
@@ -63,6 +66,12 @@ const Navbar = () => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  // Handles supabase signouts
+  const handleSignOut = () => {
+    dispatch(logout());
+    handleCloseNavMenu();
   };
 
   return (
@@ -171,10 +180,7 @@ const Navbar = () => {
                   >
                     {router.pathname === "/admin" ? (
                       <Button
-                        onClick={() => {
-                          router.push("/");
-                          handleCloseNavMenu();
-                        }}
+                        onClick={handleSignOut}
                         sx={{ my: 2, color: "white", display: "block" }}
                       >
                         Sign Out

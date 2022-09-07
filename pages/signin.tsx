@@ -2,8 +2,11 @@ import { Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 import Auth from "../Components/Individual/Auth";
-import { supabase } from "../utils/supabaseClient";
+import { useAppSelector } from "../redux/hooks";
+import { RootState, store } from "../redux/store";
 
 /**
  * @fileoverview Admin login page
@@ -13,6 +16,14 @@ const SignIn: NextPage = () => {
   //Media query to check if we're below md viewport width
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
+
+  const authed = useAppSelector((state: RootState) => state.user.displayName);
+
+  // Reroute if authed
+  const router = useRouter();
+  useEffect(() => {
+    if (authed !== null) router.replace("/admin");
+  }, [authed, router]);
 
   return (
     <div>
