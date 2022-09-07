@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getAuth } from "firebase/auth";
-import { fbase } from "../pages/api/Firebase";
+import { supabase } from "../utils/supabaseClient";
 import { RootState } from "./store";
 
 export interface userState {
@@ -32,8 +31,7 @@ const userSlice = createSlice({
         phoneNumber: "",
         photoURL: "",
       };
-      const auth = getAuth(fbase);
-      auth.signOut();
+      supabase.auth.signOut();
     },
   },
 });
