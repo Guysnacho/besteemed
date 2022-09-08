@@ -29,10 +29,8 @@ const ForgotPass = () => {
     setLoading(true);
     if (email) {
       supabase.auth.api.resetPasswordForEmail(email).then((res) => {
-        console.info(res.data);
         setSuccessMessage("Check your email for a link :)");
         if (res.data) {
-          console.info(res.data);
           setSuccessMessage("Check your email for a confirmation");
         } else if (res.error) {
           console.error("You got an error - " + res.error.message);
