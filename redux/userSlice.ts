@@ -1,19 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { Session, User } from "@supabase/supabase-js";
 import { supabase } from "../utils/supabaseClient";
 import { RootState } from "./store";
 
 export interface userState {
-  uid?: string | null | undefined;
-  displayName?: string | null | undefined;
-  email?: string | null | undefined;
-  phoneNumber?: string | null | undefined;
-  photoURL?: string | null | undefined;
+  user?: User;
+  session?: Session;
 }
 
 //Setup database interface
 export interface dbReqs {}
 
-var initialState = {} as userState;
+var initialState: userState = {};
 
 const userSlice = createSlice({
   name: "user",
@@ -24,13 +22,7 @@ const userSlice = createSlice({
       state = action.payload;
     },
     logout: (state) => {
-      state = {
-        uid: "",
-        displayName: "",
-        email: "",
-        phoneNumber: "",
-        photoURL: "",
-      };
+      state = {};
       supabase.auth.signOut();
     },
   },

@@ -11,6 +11,8 @@ import {
 } from "@mui/material";
 import { UserCredentials } from "@supabase/supabase-js";
 import { useState } from "react";
+import { useAppDispatch } from "../../redux/hooks";
+import { login } from "../../redux/userSlice";
 import { supabase } from "../../utils/supabaseClient";
 
 const emailVal = new RegExp("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}$");
@@ -27,20 +29,22 @@ const Auth = (props: { signUp: boolean }) => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
 
+  // App state
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  const dispatch = useAppDispatch(); // Sends actions to redux
+
   const handleLogin = () => {
     if (email && password) {
       setLoading(true);
       supabase.auth.signIn({ email, password }).then((res) => {
-        if (res.user) {
-          console.info(
-            res.user.user_metadata + " " + res.user.aud + " " + res.user.id
-          );
+        if (res.user != null && res.session != null) {
+          console.info(res.user.user_metadata);
+          dispatch(login({ user: res.user, session: res.session }));
         } else if (res.error) {
           console.error("You got an error - " + res.error.message);
           setErrorMessage(res.error.message);

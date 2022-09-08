@@ -5,8 +5,10 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Auth from "../Components/Individual/Auth";
 import ForgotPass from "../Components/Individual/ForgotPass";
-import { useAppSelector } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { RootState } from "../redux/store";
+import { login } from "../redux/userSlice";
+import { supabase } from "../utils/supabaseClient";
 
 /**
  * @fileoverview Admin login page
@@ -17,7 +19,8 @@ const SignIn: NextPage = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
 
-  const authed = useAppSelector((state: RootState) => state.user.displayName);
+  const authed = useAppSelector((state: RootState) => state.user.user != null);
+  const dispatch = useAppDispatch(); // Sends actions to redux
 
   const [forgot, setForgot] = useState(false);
   const [signUp, setSignUp] = useState(false);
@@ -25,8 +28,12 @@ const SignIn: NextPage = () => {
   // Reroute if authed
   const router = useRouter();
   useEffect(() => {
-    if (authed != null) router.replace("/admin");
-  }, [authed, router]);
+    const session = supabase.auth.session();
+    if (session !== null && session.user !== null) {
+      dispatch(login({ user: session.user, session: session }));
+      router.replace("/admin");
+    }
+  }, [authed, dispatch, router]);
 
   return (
     <div>
