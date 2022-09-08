@@ -9,21 +9,20 @@ import {
   useMediaQuery,
   useTheme,
 } from "@mui/material";
+import { UserCredentials } from "@supabase/supabase-js";
 import { useState } from "react";
 import { supabase } from "../../utils/supabaseClient";
 
-interface ApiError {
-  data: {};
-  error: {
-    message: string;
-    status: number;
-    session: {};
-    user: {};
-  };
-  session: {};
-}
+const emailVal = new RegExp("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}$");
 
-const Auth = () => {
+type ApiError = {
+  data: {} | null;
+  error: { message: string; status: number } | null;
+  session: any | null;
+  user: UserCredentials | null;
+};
+
+const Auth = (props: { signUp: boolean }) => {
   //Media query to check if we're below md viewport width
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
@@ -31,20 +30,42 @@ const Auth = () => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
   const handleLogin = () => {
     if (email && password) {
       setLoading(true);
-      supabase.auth
-        .signIn({ email, password })
-        .then((user) => {
-          console.info(user);
-        })
-        .catch((error) => {
-          console.error("You got an error - " + error.error.message);
-          setErrorMessage(error.error.message);
-        });
+      supabase.auth.signIn({ email, password }).then((res) => {
+        if (res.user) {
+          console.info(
+            res.user.user_metadata + " " + res.user.aud + " " + res.user.id
+          );
+        } else if (res.error) {
+          console.error("You got an error - " + res.error.message);
+          setErrorMessage(res.error.message);
+        }
+      });
+    } else {
+      setErrorMessage("You didn't fill everything in");
+    }
+    setEmail("");
+    setPassword("");
+    setLoading(false);
+  };
+
+  const handleSignUp = () => {
+    setLoading(true);
+    if (email && password) {
+      supabase.auth.signUp({ email, password }).then((res) => {
+        if (res.user) {
+          console.info(res.user);
+          setSuccessMessage("Check your email for a confirmation");
+        } else if (res.error) {
+          console.error("You got an error - " + res.error.message);
+          setErrorMessage(res.error.message);
+        }
+      });
     } else {
       setErrorMessage("You didn't fill everything in");
     }
@@ -73,38 +94,49 @@ const Auth = () => {
           ) : (
             <></>
           )}
-          <TextField
-            id="outlined-username-input"
-            variant="outlined"
-            label="Username"
-            type="email"
-            value={email}
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
-            disabled={loading}
-            required
-          />
-          <TextField
-            id="outlined-password-input"
-            variant="outlined"
-            label="Password"
-            type="password"
-            auto-complete="current-password"
-            value={password}
-            onChange={(e) => {
-              setPassword(e.target.value);
-            }}
-            disabled={loading}
-            required
-          />
+          {successMessage !== "" ? (
+            <Alert severity="success">
+              {"Please check your email for a confirmation"}
+            </Alert>
+          ) : (
+            <>
+              <TextField
+                id="outlined-username-input"
+                variant="outlined"
+                label="Username"
+                type="email"
+                error={!emailVal.test(email)}
+                autoComplete="current-email"
+                value={email}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                }}
+                disabled={loading}
+                required
+              />
+              <TextField
+                id="outlined-password-input"
+                variant="outlined"
+                label="Password"
+                type="password"
+                auto-complete="current-password"
+                error={password.length < 6}
+                value={password}
+                onChange={(e) => {
+                  setPassword(e.target.value);
+                }}
+                disabled={loading}
+                required
+              />
+            </>
+          )}
           <Button
             variant="outlined"
             aria-label="login"
-            onClick={handleLogin}
+            onClick={props.signUp ? handleSignUp : handleLogin}
             disabled={!(email && password)}
           >
-            Sign In
+            {props.signUp ? "Sign Up" : "Sign In"}
           </Button>
         </Stack>
       </FormControl>

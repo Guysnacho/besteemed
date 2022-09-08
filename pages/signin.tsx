@@ -1,12 +1,12 @@
 import { Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
 import { NextPage } from "next";
 import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Auth from "../Components/Individual/Auth";
+import ForgotPass from "../Components/Individual/ForgotPass";
 import { useAppSelector } from "../redux/hooks";
-import { RootState, store } from "../redux/store";
+import { RootState } from "../redux/store";
 
 /**
  * @fileoverview Admin login page
@@ -19,10 +19,13 @@ const SignIn: NextPage = () => {
 
   const authed = useAppSelector((state: RootState) => state.user.displayName);
 
+  const [forgot, setForgot] = useState(false);
+  const [signUp, setSignUp] = useState(false);
+
   // Reroute if authed
   const router = useRouter();
   useEffect(() => {
-    if (authed !== null) router.replace("/admin");
+    if (authed != null) router.replace("/admin");
   }, [authed, router]);
 
   return (
@@ -43,21 +46,34 @@ const SignIn: NextPage = () => {
             fontSize={matches ? "2.3rem" : undefined}
             mx={matches ? 4 : 8}
           >
-            Sign In
+            {forgot ? "Forgot your password?" : signUp ? "Sign Up" : "Sign In"}
           </Typography>
         </Grid>
         <Grid item xs={12} my={matches ? 2 : 5}>
-          <Auth />
+          {!forgot ? <Auth signUp={signUp} /> : <ForgotPass />}
         </Grid>
-        <Grid item xs={12} mb={matches ? 2 : 5}>
+        <Grid item xs={12} mb={matches ? 2 : 5} component="a">
           <Typography
             variant="body1"
             fontSize={matches ? ".9rem" : undefined}
             mt={1}
             textAlign="center"
             color={theme.palette.secondary.dark}
+            onClick={(e) => setForgot(!forgot)}
           >
-            <Link href="/signin">Forgot your password?</Link>
+            {forgot ? "Go back" : "Forgot your password?"}
+          </Typography>
+        </Grid>
+        <Grid item xs={12} mb={matches ? 2 : 5} component="a">
+          <Typography
+            variant="body1"
+            fontSize={matches ? ".9rem" : undefined}
+            mt={1}
+            textAlign="center"
+            color={theme.palette.secondary.dark}
+            onClick={(e) => setSignUp(!signUp)}
+          >
+            {signUp ? "Go back" : "Sign Up"}
           </Typography>
         </Grid>
       </Grid>

@@ -72,6 +72,7 @@ const Navbar = () => {
   const handleSignOut = () => {
     dispatch(logout());
     handleCloseNavMenu();
+    router.push("/signin");
   };
 
   return (
