@@ -10,6 +10,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { UserCredentials } from "@supabase/supabase-js";
+import { NextRouter, Router } from "next/router";
 import { useState } from "react";
 import { useAppDispatch } from "../../redux/hooks";
 import { login } from "../../redux/userSlice";
@@ -24,7 +25,7 @@ type ApiError = {
   user: UserCredentials | null;
 };
 
-const Auth = (props: { signUp: boolean }) => {
+const Auth = (props: { signUp: boolean; router: NextRouter }) => {
   //Media query to check if we're below md viewport width
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
@@ -43,8 +44,8 @@ const Auth = (props: { signUp: boolean }) => {
       setLoading(true);
       supabase.auth.signIn({ email, password }).then((res) => {
         if (res.user != null && res.session != null) {
-          console.info(res.user.user_metadata);
           dispatch(login({ user: res.user, session: res.session }));
+          props.router.replace("/admin");
         } else if (res.error) {
           console.error("You got an error - " + res.error.message);
           setErrorMessage(res.error.message);

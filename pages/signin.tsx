@@ -57,7 +57,7 @@ const SignIn: NextPage = () => {
           </Typography>
         </Grid>
         <Grid item xs={12} my={matches ? 2 : 5}>
-          {!forgot ? <Auth signUp={signUp} /> : <ForgotPass />}
+          {!forgot ? <Auth signUp={signUp} router={router} /> : <ForgotPass />}
         </Grid>
         <Grid item xs={12} mb={matches ? 2 : 5} component="a">
           <Typography
