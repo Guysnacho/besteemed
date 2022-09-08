@@ -2,6 +2,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import InstagramIcon from "@mui/icons-material/Instagram";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
+import LoginIcon from '@mui/icons-material/Login';
 import YouTubeIcon from "@mui/icons-material/YouTube";
 import {
   Grid,
@@ -9,7 +10,7 @@ import {
   Stack,
   Typography,
   useMediaQuery,
-  useTheme,
+  useTheme
 } from "@mui/material";
 import IconLink from "./Individual/IconLink";
 
@@ -85,6 +86,11 @@ const Footer = () => {
           <IconLink
             href="tel:614-596-4626"
             child={<PhoneRoundedIcon />}
+            color={contrastColor}
+          />
+          <IconLink
+            href="/signin"
+            child={<LoginIcon />}
             color={contrastColor}
           />
         </Stack>

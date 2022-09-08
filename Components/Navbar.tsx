@@ -18,10 +18,8 @@ import {
 } from "@mui/material";
 import { useRouter } from "next/router";
 import React, { useEffect } from "react";
-
-interface Props {
-  children: React.ReactElement;
-}
+import { useAppDispatch } from "../redux/hooks";
+import { logout } from "../redux/userSlice";
 
 /**
  * @function Navbar
@@ -38,11 +36,19 @@ const Navbar = () => {
     "Leadership",
     "CPR",
   ];
-  const links = ["/", "/bookstore", "/esteemed", "/excursions", "/leadership", "/cpr"];
+  const links = [
+    "/",
+    "/bookstore",
+    "/esteemed",
+    "/excursions",
+    "/leadership",
+    "/cpr",
+  ];
 
   //Media query to check if we're below md viewport width
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
+  const dispatch = useAppDispatch(); // Sends actions to redux
 
   //Updates nav if we change page via a different link
   useEffect(() => {
@@ -60,6 +66,13 @@ const Navbar = () => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  // Handles supabase signouts
+  const handleSignOut = () => {
+    dispatch(logout());
+    handleCloseNavMenu();
+    router.push("/signin");
   };
 
   return (
@@ -137,7 +150,11 @@ const Navbar = () => {
             </AppBar>
           </Grid>
         ) : (
-          <Grid item xs={12}>
+          <Grid
+            item
+            xs={12}
+            sx={{ flexGrow: router.pathname === "/admin" ? 1 : undefined }}
+          >
             <AppBar position="static">
               <Container maxWidth="xl">
                 <Toolbar disableGutters>
@@ -153,20 +170,36 @@ const Navbar = () => {
                     </Typography>
                   </Button>
                   <Box
-                    sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}
+                    sx={{
+                      flexGrow: 1,
+                      display: { xs: "none", md: "flex" },
+                      flexDirection:
+                        router.pathname === "/admin"
+                          ? "row-reverse"
+                          : undefined,
+                    }}
                   >
-                    {pages.map((page) => (
+                    {router.pathname === "/admin" ? (
                       <Button
-                        key={page}
-                        onClick={() => {
-                          router.push(links[pages.indexOf(page)]);
-                          handleCloseNavMenu();
-                        }}
+                        onClick={handleSignOut}
                         sx={{ my: 2, color: "white", display: "block" }}
                       >
-                        {page}
+                        Sign Out
                       </Button>
-                    ))}
+                    ) : (
+                      pages.map((page) => (
+                        <Button
+                          key={page}
+                          onClick={() => {
+                            router.push(links[pages.indexOf(page)]);
+                            handleCloseNavMenu();
+                          }}
+                          sx={{ my: 2, color: "white", display: "block" }}
+                        >
+                          {page}
+                        </Button>
+                      ))
+                    )}
                   </Box>
                 </Toolbar>
               </Container>

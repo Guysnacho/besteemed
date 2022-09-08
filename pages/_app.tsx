@@ -3,7 +3,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
 import React, { ReactElement, ReactNode } from "react";
+import { Provider } from "react-redux";
 import Layout from "../Components/Layout";
+import { store } from "../redux/store";
 import "../styles/globals.css";
 
 /**
@@ -88,9 +90,11 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       <React.StrictMode>
         <CssBaseline /> {/*Reset css to a baseline for MUI*/}
         <ThemeProvider theme={theme}>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
+          <Provider store={store}>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </Provider>
         </ThemeProvider>
       </React.StrictMode>
     </>
