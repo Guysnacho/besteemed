@@ -1,5 +1,7 @@
 import { Grid, Typography } from "@mui/material";
 import { NextPage } from "next";
+import Head from "next/head";
+import UnderConstruction from "../Components/Individual/UnderConstruction";
 
 /**
  * @fileoverview Admin page
@@ -7,13 +9,22 @@ import { NextPage } from "next";
  */
 const Admin: NextPage = () => {
   return (
-    <Grid container>
-      <Grid item xs={12} my="30vh">
-        <Typography variant="h3" my="auto" textAlign="center">
-          Admin Page
-        </Typography>
+    <div>
+      <Head>
+        <title>Dashboard - Bosede Adetunji</title>
+        <meta name="description" content="Admin Home - Bosede Adetunji" />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+
+      <Grid container>
+        <Grid item xs={12} my="30vh">
+          <Typography variant="h3" my="auto" textAlign="center">
+            Admin Page
+          </Typography>
+        </Grid>
       </Grid>
-    </Grid>
+      <UnderConstruction />
+    </div>
   );
 };
 

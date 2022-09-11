@@ -14,9 +14,8 @@ const UnderConstruction = () => {
         </Typography>
         <Typography variant="body1" textAlign="center" my={5}>
           Hi, unfortunately this part of the site is under construction but
-          check back later, there should be something soon 😁 <br /> Information
-          on CPR and leadership classes are on their way along with the work
-          we're doing across the world to empower others like you!
+          check back later, there should be something soon 😁 <br /> More admin
+          features are on the way.
         </Typography>
       </Grid>
     </Grid>

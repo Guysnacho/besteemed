@@ -39,7 +39,7 @@ const SignIn: NextPage = () => {
     <div>
       <Head>
         {/*Metadate of the page, optimize grid up top*/}
-        <title>Sign In - Bosede Adetunji</title>
+        <title>{signUp ? "Sign Up" : "Sign In"} - Bosede Adetunji</title>
         <meta name="description" content="Admin Login" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
