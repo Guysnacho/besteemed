@@ -46,7 +46,9 @@ const Auth = (props: { signUp: boolean; router: NextRouter }) => {
       setLoading(true);
       supabase.auth.signIn({ email, password }).then((res) => {
         if (res.user != null && res.session != null) {
-          dispatch(login({ user: res.user, session: res.session }));
+          dispatch(
+            login({ user: res.user, session: res.session, name: fname })
+          );
           props.router.replace("/admin");
         } else if (res.error) {
           console.error("You got an error - " + res.error.message);
