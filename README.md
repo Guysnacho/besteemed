@@ -4,12 +4,14 @@ Home of the new Esteemed Woman website
 
 ### Next Steps
 
-[ x ] - Change index into huge hero with links
-[ x ] - Optimize layout, something is getting in the way of responsive sizing and I don't wanna blame it on myself. Remove in the meantime
-[ x ] - Add initiatives (CPR, Esteemed Woman Abroad, Israel Excursions)
-[ ] - Add admin side
-[ ] - Add forms instead of email redirects
-[ ] - Add billing
+- [x] - Change index into huge hero with links
+- [x] - Optimize layout, something is getting in the way of responsive sizing and I don't wanna blame it on myself. Remove in the meantime
+- [x] - Add initiatives (CPR, Esteemed Woman Abroad, Israel Excursions)
+- [x] - Add authentification flow and redirects for unauthenticated users
+- [x] - Setup database for profiles, future messaging features, and user roles
+- [x] - Add admin side
+- [ ] - Add forms instead of email redirects
+- [ ] - Add billing
 
 ## Getting Started
 
