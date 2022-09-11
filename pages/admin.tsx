@@ -1,13 +1,31 @@
 import { Grid, Typography } from "@mui/material";
 import { NextPage } from "next";
 import Head from "next/head";
-import UnderConstruction from "../Components/Individual/UnderConstruction";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { RootState } from "../redux/store";
+import { login, logout } from "../redux/userSlice";
+import { supabase } from "../utils/supabaseClient";
 
 /**
  * @fileoverview Admin page
  * @returns {NextPage} - A Nextjs Page
  */
 const Admin: NextPage = () => {
+  //component level state
+  const router = useRouter();
+  const dispatch = useAppDispatch(); // Sends actions to redux
+
+  //Auth redirect
+  useEffect(() => {
+    const session = supabase.auth.session();
+    if (session == null || session.user == null) {
+      dispatch(logout());
+      router.replace("/signin");
+    }
+  }, [dispatch, router]);
+
   return (
     <div>
       <Head>
@@ -23,7 +41,6 @@ const Admin: NextPage = () => {
           </Typography>
         </Grid>
       </Grid>
-      <UnderConstruction />
     </div>
   );
 };
