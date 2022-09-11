@@ -1,3 +1,4 @@
+//@ts-nocheck
 import {
   Card,
   Grid,
@@ -15,10 +16,19 @@ import {
 import { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { logout } from "../redux/userSlice";
 import { supabase } from "../utils/supabaseClient";
+
+type Profiles = {
+  fname: string;
+  lname: string;
+  email: string;
+  interests: string;
+  updated_at?: Date;
+  role_id?: number;
+};
 
 /**
  * @fileoverview Admin page
@@ -29,6 +39,7 @@ const Admin: NextPage = () => {
   const router = useRouter();
   const dispatch = useAppDispatch(); // Sends actions to redux
   const store = useAppSelector((state) => state.user);
+  const [clients, setClients] = useState([]);
 
   //Auth redirect
   useEffect(() => {
@@ -38,13 +49,33 @@ const Admin: NextPage = () => {
       router.replace("/signin");
     } else {
       getData();
-    } else {
-      getData();
     }
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   //component functions
   const getData = () => {
+    let incoming = [];
+    supabase
+      .from<Profiles>("profiles")
+      .select("fname, lname, email, interests")
+      .eq("role_id", 1)
+      .order("updated_at")
+      .then((res) => {
+        if (res.body) {
+          res.body.forEach((profile) =>
+            incoming.push(
+              createData(
+                profile.fname + " " + profile.lname,
+                profile.email,
+                profile.interests
+              )
+            )
+          );
+          console.log(incoming);
+          setClients(incoming);
+        }
+      });
     console.log("Get supabase data");
   };
 
@@ -52,15 +83,9 @@ const Admin: NextPage = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
 
-  function createData(name: string, email: string, interests: string[]) {
+  function createData(name: string, email: string, interests: string) {
     return { name, email, interests };
   }
-
-  const rows = [
-    createData("Samuel Adetunji", "guysnacho2@gmail.com", ["CPR", "Israel"]),
-    createData("Samuel Adetunji", "guysnacho2@gmail.com", ["CPR", "Israel"]),
-    createData("Samuel Adetunji", "guysnacho2@gmail.com", ["CPR", "Israel"]),
-  ];
 
   return (
     <div>
@@ -83,10 +108,10 @@ const Admin: NextPage = () => {
           my="5vh"
           maxWidth={matches ? "80%" : "95%"}
           mx="auto"
-          px={matches ? 0 : 3}
+          sx={{ px: { xs: 0, sm: 2, md: 3 } }}
         >
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <Table sx={{ minWidth: "40vw" }} aria-label="simple table">
               <TableHead>
                 <TableRow>
                   <TableCell>Client</TableCell>
@@ -95,17 +120,17 @@ const Admin: NextPage = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {rows.map((row) => (
+                {clients.map((client) => (
                   <TableRow
-                    key={row.name}
+                    key={client.name}
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                      {row.name}
+                      {client.name}
                     </TableCell>
-                    <TableCell align="right">{row.email}</TableCell>
+                    <TableCell align="right">{client.email}</TableCell>
                     <TableCell align="right">
-                      {row.interests.map((item) => `${item}, `)}
+                      {`${client.interests}  `}
                     </TableCell>
                   </TableRow>
                 ))}
@@ -120,7 +145,7 @@ const Admin: NextPage = () => {
           my="5vh"
           maxWidth={matches ? "80vw" : "95vw"}
           mx="auto"
-          px={matches ? 0 : 3}
+          sx={{ px: { xs: 0, sm: 2, md: 1 } }}
         >
           <Card variant="outlined">
             <Typography
@@ -136,7 +161,9 @@ const Admin: NextPage = () => {
               mx={2}
               fontSize={matches ? ".9rem" : undefined}
             >
-              You have {rows.length} clients
+              {clients.length == 0
+                ? "Currently, you have no clients."
+                : `You have ${clients.length} clients`}
             </Typography>
           </Card>
         </Grid>
