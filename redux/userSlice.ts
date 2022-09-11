@@ -5,11 +5,9 @@ import { RootState } from "./store";
 
 export interface userState {
   user?: User;
+  name?: string;
   session?: Session;
 }
-
-//Setup database interface
-export interface dbReqs {}
 
 var initialState: userState = {};
 
@@ -22,13 +20,16 @@ const userSlice = createSlice({
       state = action.payload;
     },
     logout: (state) => {
-      state = {};
+      state = { name: "" };
       supabase.auth.signOut();
+    },
+    refreshuser: (state, action: PayloadAction<userState>) => {
+      state = action.payload;
     },
   },
 });
 
-export const { login, logout } = userSlice.actions;
+export const { login, logout, refreshuser } = userSlice.actions;
 
 // Other code such as selectors can use the imported `RootState` type
 export const selectUser = (state: RootState) => state.user;
