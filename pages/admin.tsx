@@ -38,6 +38,8 @@ const Admin: NextPage = () => {
       router.replace("/signin");
     } else {
       getData();
+    } else {
+      getData();
     }
   });
 
