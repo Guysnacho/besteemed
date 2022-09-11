@@ -66,7 +66,7 @@ const Auth = (props: { signUp: boolean; router: NextRouter }) => {
   const handleSignUp = () => {
     setLoading(true);
     if (email && password && fname && lname) {
-      supabase.auth.signUp({ email, password }).then((res) => {
+      supabase.auth.signUp({ email, password,  }).then((res) => {
         if (res.user) {
           console.info(res.user);
           supabase
@@ -77,6 +77,7 @@ const Auth = (props: { signUp: boolean; router: NextRouter }) => {
                   id: res.user.id,
                   fname: fname,
                   lname: lname,
+                  email: email,
                   role_id: 0,
                 },
               ],
