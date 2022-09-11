@@ -34,6 +34,8 @@ const Auth = (props: { signUp: boolean; router: NextRouter }) => {
   const [loading, setLoading] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -44,7 +46,9 @@ const Auth = (props: { signUp: boolean; router: NextRouter }) => {
       setLoading(true);
       supabase.auth.signIn({ email, password }).then((res) => {
         if (res.user != null && res.session != null) {
-          dispatch(login({ user: res.user, session: res.session }));
+          dispatch(
+            login({ user: res.user, session: res.session, name: fname })
+          );
           props.router.replace("/admin");
         } else if (res.error) {
           console.error("You got an error - " + res.error.message);
@@ -61,11 +65,32 @@ const Auth = (props: { signUp: boolean; router: NextRouter }) => {
 
   const handleSignUp = () => {
     setLoading(true);
-    if (email && password) {
+    if (email && password && fname && lname) {
       supabase.auth.signUp({ email, password }).then((res) => {
         if (res.user) {
           console.info(res.user);
-          setSuccessMessage("Check your email for a confirmation");
+          supabase
+            .from("profiles")
+            .insert(
+              [
+                {
+                  id: res.user.id,
+                  fname: fname,
+                  lname: lname,
+                  role_id: 0,
+                },
+              ],
+              { returning: "minimal" }
+            )
+            .then((res) => {
+              if (res.error) {
+                setSuccessMessage(
+                  "Your account has been created but something went wrong along the way. No worries, we'll fix it just let us know."
+                );
+              } else {
+                setSuccessMessage("Check your email for a confirmation");
+              }
+            });
         } else if (res.error) {
           console.error("You got an error - " + res.error.message);
           setErrorMessage(res.error.message);
@@ -105,13 +130,51 @@ const Auth = (props: { signUp: boolean; router: NextRouter }) => {
             </Alert>
           ) : (
             <>
+              {props.signUp ? (
+                <>
+                  <TextField
+                    id="outlined-first-name-input"
+                    variant="outlined"
+                    label="First Name"
+                    type="text"
+                    aria-label="first name"
+                    placeholder="Ngozi"
+                    error={fname.length < 3}
+                    autoComplete="first-name"
+                    value={fname}
+                    onChange={(e) => {
+                      setFname(e.target.value);
+                    }}
+                    disabled={loading}
+                    required
+                  />
+                  <TextField
+                    id="outlined-family-name-input"
+                    variant="outlined"
+                    label="Last Name"
+                    type="text"
+                    aria-label="family name"
+                    placeholder="Okonjo-Iweala"
+                    error={lname.length < 3}
+                    autoComplete="family-name"
+                    value={lname}
+                    onChange={(e) => {
+                      setLname(e.target.value);
+                    }}
+                    disabled={loading}
+                    required
+                  />
+                </>
+              ) : (
+                <></>
+              )}
               <TextField
-                id="outlined-username-input"
+                id="outlined-email-input"
                 variant="outlined"
-                label="Username"
+                label="Email"
                 type="email"
                 error={!emailVal.test(email)}
-                autoComplete="current-email"
+                autoComplete="email"
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);

@@ -19,7 +19,6 @@ const SignIn: NextPage = () => {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
 
-  const authed = useAppSelector((state: RootState) => state.user.user != null);
   const dispatch = useAppDispatch(); // Sends actions to redux
 
   const [forgot, setForgot] = useState(false);
@@ -33,13 +32,13 @@ const SignIn: NextPage = () => {
       dispatch(login({ user: session.user, session: session }));
       router.replace("/admin");
     }
-  }, [authed, dispatch, router]);
+  }, [dispatch, router]);
 
   return (
     <div>
       <Head>
         {/*Metadate of the page, optimize grid up top*/}
-        <title>Sign In - Bosede Adetunji</title>
+        <title>{signUp ? "Sign Up" : "Sign In"} - Bosede Adetunji</title>
         <meta name="description" content="Admin Login" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
