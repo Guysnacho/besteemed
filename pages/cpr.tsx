@@ -12,11 +12,18 @@ import {
 } from "@mui/material";
 import type { NextPage } from "next";
 import Head from "next/head";
+import { useState } from "react";
+import InterestForm from "../Components/Individual/InterestForm";
 
 const cprlink =
   "mailto:lilyinhishands@ymail.com?subject=CPR%20Training&body=Hello,%20my%20name%20is%20_______%20and%20I%20would%20like%20to%20sign%20up%20for%20a%20CPR%20training%20session.";
 
 const CPR: NextPage = () => {
+  //App state
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
   //Media query to check if we're below md viewport width
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
@@ -35,6 +42,11 @@ const CPR: NextPage = () => {
 
       <main>
         <Grid container>
+          <InterestForm
+            open={open}
+            handleOpen={handleOpen}
+            handleClose={handleClose}
+          />
           <Grid item xs={12}>
             <Typography
               variant="h3"
@@ -78,7 +90,7 @@ const CPR: NextPage = () => {
                 size="large"
                 color="secondary"
                 aria-label="register for course"
-                href={cprlink}
+                onClick={() => setOpen(!open)}
               >
                 Get in touch today!
               </Button>
@@ -136,7 +148,7 @@ const CPR: NextPage = () => {
                 size="large"
                 color="secondary"
                 aria-label="register for course"
-                href={cprlink}
+                onClick={() => setOpen(!open)}
               >
                 {/* eslint-disable-next-line react/no-unescaped-entities */}
                 Don't wait, learn today!
