@@ -278,6 +278,7 @@ const Home: NextPage = () => {
                   variant="contained"
                   aria-label="express-interest"
                   onClick={handleOpen}
+                  size="large"
                   sx={{
                     my: { xs: 2, sm: 4, md: 8 },
                     color: theme.palette.common.white,
