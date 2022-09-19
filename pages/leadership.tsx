@@ -16,19 +16,18 @@ import {
   useTheme,
 } from "@mui/material";
 import type { NextPage } from "next";
-import banner from "../assets/banners/leadership.png";
 import Head from "next/head";
 import Image from "next/image";
 import { useState } from "react";
-
-const leadershipLink =
-  "mailto:lilyinhishands@ymail.com?subject=Leadership%20Training&body=Hello,%20my%20name%20is%20_______%20and%20I%20would%20like%20to%20inquire%20about%20experiencing%20a%20leadership%20training%20session.";
-const speakingLink =
-  "mailto:lilyinhishands@ymail.com?subject=Speaker%20Events&body=Hello,%20my%20name%20is%20_______%20and%20I%20would%20like%20to%20inquire%20about%20hosting%20a%20speaker%20event.";
+import banner from "../assets/banners/leadership.png";
+import InterestForm from "../Components/Individual/InterestForm";
 
 const Services: NextPage = () => {
   //App state
   const [hover1, setHover1] = useState(false);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   //Media query to check if we're below md viewport width
   const theme = useTheme();
@@ -45,6 +44,11 @@ const Services: NextPage = () => {
       </Head>
 
       <Grid container component="main" mt={6}>
+        <InterestForm
+          open={open}
+          handleOpen={handleOpen}
+          handleClose={handleClose}
+        />
         <Grid item xs={12}>
           <Typography
             variant="h3"
@@ -142,7 +146,7 @@ const Services: NextPage = () => {
                   size="medium"
                   color="info"
                   aria-label="speaking inquiry"
-                  href={leadershipLink}
+                  onClick={() => setOpen(!open)}
                 >
                   Reach Out
                 </Button>
@@ -185,7 +189,7 @@ const Services: NextPage = () => {
                   size="medium"
                   color="info"
                   aria-label="speaking inquiry"
-                  href={speakingLink}
+                  onClick={() => setOpen(!open)}
                 >
                   Register Today!
                 </Button>

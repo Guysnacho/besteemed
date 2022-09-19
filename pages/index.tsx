@@ -3,6 +3,7 @@ import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import {
   Box,
+  Button,
   Card,
   CardContent,
   Grid,
@@ -11,7 +12,7 @@ import {
   Stack,
   Typography,
   useMediaQuery,
-  useTheme,
+  useTheme
 } from "@mui/material";
 import "keen-slider/keen-slider.min.css";
 import { useKeenSlider } from "keen-slider/react";
@@ -25,6 +26,7 @@ import banner5 from "../assets/banners/banner5.webp";
 import banner6 from "../assets/banners/banner6.webp";
 import blog2 from "../assets/banners/blog2.webp";
 import CreativeCard from "../Components/Individual/CreativeCard";
+import InterestForm from "../Components/Individual/InterestForm";
 
 /**
  * @fileoverview Website homepage
@@ -68,6 +70,9 @@ const carouselData = [
 const Home: NextPage = () => {
   //App state
   const [currentSlide, setCurrentSlide] = useState(0); //Tracking the page of the pagination
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
   const [refCallback, slider] = useKeenSlider(
     {
       initial: 0,
@@ -141,6 +146,11 @@ const Home: NextPage = () => {
 
       <main>
         <Grid container>
+          <InterestForm
+            open={open}
+            handleOpen={handleOpen}
+            handleClose={handleClose}
+          />
           <Grid item xs={12}>
             <Box
               sx={{
@@ -248,6 +258,36 @@ const Home: NextPage = () => {
             </IconButton>
           </Grid>
           <Grid container>
+            <Grid item xs={12}>
+              <Typography
+                my={2}
+                textAlign="center"
+                variant={matches ? "h6" : "h4"}
+                fontSize={matches ? "1rem" : undefined}
+              >
+                Sign up for future announcements and features coming soon!
+              </Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Button
+                  variant="contained"
+                  aria-label="express-interest"
+                  onClick={handleOpen}
+                  size="large"
+                  sx={{
+                    my: { xs: 2, sm: 4, md: 8 },
+                    color: theme.palette.common.white,
+                  }}
+                >
+                  Join the Crew! 🤗
+                </Button>
+              </Box>
+            </Grid>
             <Grid item xs={12}>
               <Typography
                 variant="h4"
