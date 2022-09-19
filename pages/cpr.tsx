@@ -15,9 +15,6 @@ import Head from "next/head";
 import { useState } from "react";
 import InterestForm from "../Components/Individual/InterestForm";
 
-const cprlink =
-  "mailto:lilyinhishands@ymail.com?subject=CPR%20Training&body=Hello,%20my%20name%20is%20_______%20and%20I%20would%20like%20to%20sign%20up%20for%20a%20CPR%20training%20session.";
-
 const CPR: NextPage = () => {
   //App state
   const [open, setOpen] = useState(false);

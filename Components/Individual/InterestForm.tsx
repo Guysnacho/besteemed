@@ -16,7 +16,7 @@ import {
   TextField,
   Theme,
   Typography,
-  useTheme
+  useTheme,
 } from "@mui/material";
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
@@ -154,7 +154,6 @@ const InterestForm = (props: {
             <CardContent
               sx={{
                 textAlign: "center",
-                py: { xs: 2, md: 1 },
                 width: { xs: "75vw", sm: "50vw", md: "40vw" },
                 maxHeight: { xs: "60vh", sm: "75vh", md: "80vh" },
                 overflowY: "auto",
@@ -172,7 +171,7 @@ const InterestForm = (props: {
                   {successMessage}
                 </Alert>
               ) : (
-                <Box sx={{ mb: { xs: 4, sm: 16, md: 15 } }}>
+                <Box sx={{ mb: { xs: 4, sm: 16, md: 23, lg: 30, xl: 35 } }}>
                   <Typography variant="h6">Keep in Touch</Typography>
                   <FormControl sx={{ mt: 2 }}>
                     <Stack spacing={4} direction="column">

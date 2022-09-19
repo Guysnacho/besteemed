@@ -22,11 +22,6 @@ import { useState } from "react";
 import banner from "../assets/banners/leadership.png";
 import InterestForm from "../Components/Individual/InterestForm";
 
-const leadershipLink =
-  "mailto:lilyinhishands@ymail.com?subject=Leadership%20Training&body=Hello,%20my%20name%20is%20_______%20and%20I%20would%20like%20to%20inquire%20about%20experiencing%20a%20leadership%20training%20session.";
-const speakingLink =
-  "mailto:lilyinhishands@ymail.com?subject=Speaker%20Events&body=Hello,%20my%20name%20is%20_______%20and%20I%20would%20like%20to%20inquire%20about%20hosting%20a%20speaker%20event.";
-
 const Services: NextPage = () => {
   //App state
   const [hover1, setHover1] = useState(false);
