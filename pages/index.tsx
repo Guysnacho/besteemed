@@ -1,5 +1,3 @@
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import {
   Box,
@@ -7,18 +5,17 @@ import {
   Card,
   CardContent,
   Grid,
-  IconButton,
   Link,
   Stack,
   Typography,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from "@mui/material";
-import "keen-slider/keen-slider.min.css";
-import { useKeenSlider } from "keen-slider/react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
+import { A11y, Autoplay, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import banner from "../assets/banners/banner-long.webp";
 import banner2 from "../assets/banners/banner2.webp";
 import banner3 from "../assets/banners/banner3.webp";
@@ -27,6 +24,11 @@ import banner6 from "../assets/banners/banner6.webp";
 import blog2 from "../assets/banners/blog2.webp";
 import CreativeCard from "../Components/Individual/CreativeCard";
 import InterestForm from "../Components/Individual/InterestForm";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/pagination";
+import { PaginationOptions } from "swiper/types";
 
 /**
  * @fileoverview Website homepage
@@ -34,6 +36,7 @@ import InterestForm from "../Components/Individual/InterestForm";
  */
 
 //Data for populating carousel
+// TODO - Add storage integration : supabase.storage.from('assets').getPublicUrl(`banners/${banner.src.substring(banner.src.lastIndexOf('.'))}`)
 const carouselData = [
   {
     src: banner,
@@ -67,70 +70,21 @@ const carouselData = [
   },
 ];
 
+const pagOptions: PaginationOptions = {
+  enabled: true,
+  clickable: true,
+  type: "bullets",
+};
+
 const Home: NextPage = () => {
   //App state
-  const [currentSlide, setCurrentSlide] = useState(0); //Tracking the page of the pagination
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [refCallback, slider] = useKeenSlider(
-    {
-      initial: 0,
-      slides: carouselData.length,
-      slideChanged(slider) {
-        setCurrentSlide(slider.track.details.rel);
-      },
-      loop: true,
-      detailsChanged(s) {
-        const new_opacities = s.track.details.slides.map(
-          (slide) => slide.portion
-        );
-      },
-    },
-    [
-      (slider) => {
-        let timeout: ReturnType<typeof setTimeout>;
-        let mouseOver = false;
-        function clearNextTimeout() {
-          clearTimeout(timeout);
-        }
-        function nextTimeout() {
-          clearTimeout(timeout);
-          if (mouseOver) return;
-          timeout = setTimeout(() => {
-            slider.next();
-          }, 5000);
-        }
-        slider.on("created", () => {
-          slider.container.addEventListener("mouseover", () => {
-            mouseOver = true;
-            clearNextTimeout();
-          });
-          slider.container.addEventListener("mouseout", () => {
-            mouseOver = false;
-            nextTimeout();
-          });
-          nextTimeout();
-        });
-        slider.on("dragStarted", clearNextTimeout);
-        slider.on("animationEnded", nextTimeout);
-        slider.on("updated", nextTimeout);
-      },
-    ]
-  );
   const theme = useTheme();
 
   //Media query to check if we're below md viewport width
   const matches = useMediaQuery(theme.breakpoints.down("md"));
-
-  // Functions
-  const goBack = (e: any) => {
-    e.stopPropagation() || slider.current?.prev();
-  };
-
-  const goForward = (e: any) => {
-    e.stopPropagation() || slider.current?.next();
-  };
 
   return (
     <div>
@@ -211,51 +165,30 @@ const Home: NextPage = () => {
               I am a _______
             </Typography>
           </Grid>
-
-          <Grid item xs={2} md={3} display="flex" alignItems="center">
-            <IconButton
-              onClick={goBack}
-              disabled={currentSlide === 0}
-              sx={{ mx: "auto" }}
+          <Grid item xs={12}>
+            <Swiper
+              spaceBetween={45}
+              centeredSlides={true}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+              }}
+              pagination={pagOptions}
+              loop
+              modules={[Autoplay, Pagination, A11y]}
             >
-              <ArrowBackIosIcon />
-            </IconButton>
-          </Grid>
-          <Grid
-            item
-            xs={8}
-            md={6}
-            flexDirection="row"
-            flexWrap="nowrap"
-            ref={refCallback}
-            position="relative"
-            className="keen-slider"
-            sx={{
-              overflowX: "hidden",
-              overflowY: "hidden",
-              mb: 3,
-            }}
-          >
-            {carouselData.map((item) => (
-              <CreativeCard
-                key={item.heading}
-                src={item.src}
-                heading={item.heading}
-                body={item.body}
-                link={item.link}
-                className="keen-slider__slide"
-              />
-            ))}
-          </Grid>
-
-          <Grid item xs={2} md={3} display="flex" alignItems="center">
-            <IconButton
-              onClick={goForward}
-              disabled={currentSlide === 4}
-              sx={{ mx: "auto" }}
-            >
-              <ArrowForwardIosIcon />
-            </IconButton>
+              {carouselData.map((item) => (
+                <SwiperSlide key={item.heading}>
+                  <CreativeCard
+                    key={item.heading}
+                    src={item.src}
+                    heading={item.heading}
+                    body={item.body}
+                    link={item.link}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </Grid>
           <Grid container>
             <Grid item xs={12}>

@@ -7,7 +7,7 @@ import {
   CardMedia,
   Typography,
   useMediaQuery,
-  useTheme,
+  useTheme
 } from "@mui/material";
 import { StaticImageData } from "next/image";
 import React, { useState } from "react";
@@ -18,7 +18,6 @@ export type CarouselCard = {
   heading: string;
   body: string;
   link: string;
-  className: string;
 };
 
 /**
@@ -38,11 +37,17 @@ const CreativeCard = (props: CarouselCard) => {
   return (
     <Card
       key={props.heading}
-      className={props.className}
-      variant="outlined"
-      sx={{ width: matches ? "65vw" : "40vw", mx: "auto", pb: 2 }}
+      sx={{
+        width: { xs: "60vw", sm: "45vw", md: "45vw", lg: "40vw" },
+        mx: "auto",
+        pb: 1,
+        mb: 5,
+      }}
+      elevation={hover ? 7 : 1}
+      onMouseEnter={() => setHover(true)}
+      onMouseLeave={() => setHover(false)}
     >
-      <CardMedia sx={{ width: "100%" }}>
+      <CardMedia>
         <Box
           sx={{
             background: `url(${props.src.src})`,
@@ -56,13 +61,17 @@ const CreativeCard = (props: CarouselCard) => {
         />
       </CardMedia>
       <CardContent sx={{ pb: 0 }}>
-        <Typography textAlign="center" variant="h5" pt={1}>
+        <Typography textAlign="center" variant={matches ? "h6" : "h5"} pt={1}>
           {props.heading}
         </Typography>
         <Typography
           variant="body2"
-          p={1}
+          py={1}
           fontSize={matches ? ".9rem" : undefined}
+          sx={{
+            maxHeight: { xs: "30vh", sm: "75vh", md: "80vh" },
+            overflowY: "auto",
+          }}
         >
           {props.body}
         </Typography>
