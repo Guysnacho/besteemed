@@ -7,7 +7,7 @@ import {
   CardMedia,
   Typography,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from "@mui/material";
 import { StaticImageData } from "next/image";
 import React, { useState } from "react";
@@ -38,7 +38,7 @@ const CreativeCard = (props: CarouselCard) => {
     <Card
       key={props.heading}
       sx={{
-        width: { xs: "60vw", sm: "45vw", md: "45vw", lg: "40vw" },
+        width: { xs: "60vw", sm: "45vw", md: "45vw", lg: "30vw" },
         mx: "auto",
         pb: 1,
         mb: 5,
