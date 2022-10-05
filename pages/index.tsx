@@ -16,12 +16,6 @@ import Head from "next/head";
 import { useState } from "react";
 import { A11y, Autoplay, Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
-import banner from "../assets/banners/banner-long.webp";
-import banner2 from "../assets/banners/banner2.webp";
-import banner3 from "../assets/banners/banner3.webp";
-import banner5 from "../assets/banners/banner5.webp";
-import banner6 from "../assets/banners/banner6.webp";
-import blog2 from "../assets/banners/blog2.webp";
 import CreativeCard from "../Components/Individual/CreativeCard";
 import InterestForm from "../Components/Individual/InterestForm";
 // Import Swiper styles
@@ -29,6 +23,7 @@ import "swiper/css";
 import "swiper/css/effect-fade";
 import "swiper/css/pagination";
 import { PaginationOptions } from "swiper/types";
+import { bannerUrls } from "../utils/constants";
 
 /**
  * @fileoverview Website homepage
@@ -36,34 +31,33 @@ import { PaginationOptions } from "swiper/types";
  */
 
 //Data for populating carousel
-// TODO - Add storage integration : supabase.storage.from('assets').getPublicUrl(`banners/${banner.src.substring(banner.src.lastIndexOf('.'))}`)
 const carouselData = [
   {
-    src: banner,
+    src: bannerUrls.BANNER_LONG,
     heading: "Author",
     body: "Bosede is a published author and continues to write for the growth of others but also for herself. Her subjects range from spirituality and memoirs to self-help and empowerment. You can gleam some of her work in the bookstore here",
     link: "/bookstore",
   },
   {
-    src: banner3,
+    src: bannerUrls.BANNER_3,
     heading: "Trailblazer",
     body: "This esteemed woman leads by example. This means marching with those she wants to protect and proving that anytihng is possible with enough passion and dedication!",
     link: "/esteemed",
   },
   {
-    src: blog2,
+    src: bannerUrls.BLOG_1,
     heading: "Motivational Speaker",
     body: "Through talks in person and online in the US and to Esteemed Woman groups across the globe, Bosede lifts people up and motivates them to chase their ideas and goals. Check out her outlets here!",
     link: "/esteemed",
   },
   {
-    src: banner5,
+    src: bannerUrls.BANNER_5,
     heading: "Leadership Coach",
     body: "She was coached and certified under the leadership of John C. Maxwell. Bosede equips individuals and organizations with practical tools to break barriers, maximize their strengths, and amplify their success throughout all walks of life.",
     link: "leadership",
   },
   {
-    src: banner2,
+    src: bannerUrls.BANNER_2,
     heading: "Licensed CPR Instructor",
     body: "Bosede is also a licensed CPR instructor, offering classes to groups and individuals looking for a certification. Whether its required for work or if you just want the skill, schedule a class today!",
     link: "/cpr",
@@ -108,7 +102,7 @@ const Home: NextPage = () => {
           <Grid item xs={12}>
             <Box
               sx={{
-                background: `url(${banner6.src})`,
+                background: `url(${bannerUrls.BANNER_6})`,
                 backgroundSize: matches
                   ? 1080 * 0.8 + "px " + 412 * 0.8 + "px"
                   : 1080 * 1.5 + "px " + 412 * 1.5 + "px",
@@ -245,7 +239,7 @@ const Home: NextPage = () => {
                   <Box
                     width={matches ? "100%" : "50%"}
                     sx={{
-                      background: `url(${banner.src})`,
+                      background: `url(https://zhsexifadjbwxnndgsmc.supabase.co/storage/v1/object/public/assets/banners/banner-long.webp)`,
                       backgroundSize: matches
                         ? 1080 * 0.4 + "px " + 412 * 0.4 + "px"
                         : 1080 * 0.75 + "px " + 412 * 0.75 + "px",

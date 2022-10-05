@@ -5,8 +5,7 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Auth from "../Components/Individual/Auth";
 import ForgotPass from "../Components/Individual/ForgotPass";
-import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { RootState } from "../redux/store";
+import { useAppDispatch } from "../redux/hooks";
 import { login } from "../redux/userSlice";
 import { supabase } from "../utils/supabaseClient";
 

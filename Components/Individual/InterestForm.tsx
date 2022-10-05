@@ -16,6 +16,7 @@ import {
   TextField,
   Theme,
   Typography,
+  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import Backdrop from "@mui/material/Backdrop";
@@ -23,7 +24,7 @@ import Fade from "@mui/material/Fade";
 import Modal from "@mui/material/Modal";
 import Image from "next/image";
 import { useState } from "react";
-import banner from "../../assets/banners/leadership.png";
+import { bannerUrls } from "../../utils/constants";
 import { supabase } from "../../utils/supabaseClient";
 
 const emailVal = new RegExp("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}$");
@@ -61,7 +62,10 @@ const InterestForm = (props: {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  //Media query to check if we're below md viewport width
   const theme = useTheme();
+  const matchesSm = useMediaQuery(theme.breakpoints.down("md"));
+  const matchesMd = useMediaQuery(theme.breakpoints.down("xl"));
 
   // Component functions
   const handleSignUp = () => {
@@ -149,7 +153,12 @@ const InterestForm = (props: {
             elevation={15}
           >
             <CardMedia>
-              <Image src={banner} alt="Stylish banner" />
+              <Image
+                src={bannerUrls.LEADERSHIP_1}
+                alt="Stylish banner"
+                width={matchesSm ? "250rem" : matchesMd ? "350rem" : "450rem"}
+                height="75vh"
+              />
             </CardMedia>
             <CardContent
               sx={{

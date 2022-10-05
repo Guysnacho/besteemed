@@ -1,28 +1,25 @@
 import { ImageList, ImageListItem } from "@mui/material";
 import Image from "next/image";
-import banner1 from "../../assets/banners/banner-long.webp";
-import banner2 from "../../assets/banners/banner2.webp";
-import banner3 from "../../assets/banners/banner3.webp";
-import banner6 from "../../assets/banners/banner6.webp";
+import { bannerUrls } from "../../utils/constants";
 
 const imageData = [
   {
-    img: banner6,
+    img: bannerUrls.BANNER_6,
     title: "Bosede preaching",
     rows: 2,
     cols: 2,
   },
   {
-    img: banner1,
+    img: bannerUrls.BANNER_LONG,
     title: "Bosede's books",
     rows: 2,
   },
   {
-    img: banner2,
+    img: bannerUrls.BANNER_2,
     title: "Bosede on the radio",
   },
   {
-    img: banner3,
+    img: bannerUrls.BANNER_3,
     title: "Bosede at at a Susan G. Komen walk",
   },
 ];
@@ -56,17 +53,17 @@ const ImageCollage = () => {
     >
       {imageData.map((item) => (
         <ImageListItem
-          key={item.img.src}
+          key={item.img}
           cols={item.cols || 1}
           rows={item.rows || 1}
         >
           <Image
-            {...srcset(item.img.src, 121, item.rows, item.cols)}
+            {...srcset(item.img, 121, item.rows, item.cols)}
             alt={item.title}
             layout="fill"
             placeholder="blur"
             objectFit="cover"
-            blurDataURL={item.img.blurDataURL}
+            blurDataURL={item.img}
           />
         </ImageListItem>
       ))}

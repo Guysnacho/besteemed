@@ -14,7 +14,7 @@ import React, { useState } from "react";
 
 //Consistent typing for properties
 export type CarouselCard = {
-  src: StaticImageData;
+  src: string;
   heading: string;
   body: string;
   link: string;
@@ -50,7 +50,7 @@ const CreativeCard = (props: CarouselCard) => {
       <CardMedia>
         <Box
           sx={{
-            background: `url(${props.src.src})`,
+            background: `url(${props.src})`,
             backgroundSize: matches
               ? 254 * 1.4 + "px " + 97 * 1.4 + "px"
               : 254 * 2 + "px " + 97 * 2 + "px",
