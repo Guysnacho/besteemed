@@ -1,5 +1,3 @@
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
-import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import FormatQuoteIcon from "@mui/icons-material/FormatQuote";
 import {
   Box,
@@ -7,26 +5,25 @@ import {
   Card,
   CardContent,
   Grid,
-  IconButton,
   Link,
   Stack,
   Typography,
   useMediaQuery,
-  useTheme
+  useTheme,
 } from "@mui/material";
-import "keen-slider/keen-slider.min.css";
-import { useKeenSlider } from "keen-slider/react";
 import type { NextPage } from "next";
 import Head from "next/head";
 import { useState } from "react";
-import banner from "../assets/banners/banner-long.webp";
-import banner2 from "../assets/banners/banner2.webp";
-import banner3 from "../assets/banners/banner3.webp";
-import banner5 from "../assets/banners/banner5.webp";
-import banner6 from "../assets/banners/banner6.webp";
-import blog2 from "../assets/banners/blog2.webp";
+import { A11y, Autoplay, Pagination } from "swiper";
+import { Swiper, SwiperSlide } from "swiper/react";
 import CreativeCard from "../Components/Individual/CreativeCard";
 import InterestForm from "../Components/Individual/InterestForm";
+// Import Swiper styles
+import "swiper/css";
+import "swiper/css/effect-fade";
+import "swiper/css/pagination";
+import { PaginationOptions } from "swiper/types";
+import { bannerUrls } from "../utils/constants";
 
 /**
  * @fileoverview Website homepage
@@ -36,101 +33,52 @@ import InterestForm from "../Components/Individual/InterestForm";
 //Data for populating carousel
 const carouselData = [
   {
-    src: banner,
+    src: bannerUrls.BANNER_LONG,
     heading: "Author",
     body: "Bosede is a published author and continues to write for the growth of others but also for herself. Her subjects range from spirituality and memoirs to self-help and empowerment. You can gleam some of her work in the bookstore here",
     link: "/bookstore",
   },
   {
-    src: banner3,
+    src: bannerUrls.BANNER_3,
     heading: "Trailblazer",
     body: "This esteemed woman leads by example. This means marching with those she wants to protect and proving that anytihng is possible with enough passion and dedication!",
     link: "/esteemed",
   },
   {
-    src: blog2,
+    src: bannerUrls.BLOG_1,
     heading: "Motivational Speaker",
     body: "Through talks in person and online in the US and to Esteemed Woman groups across the globe, Bosede lifts people up and motivates them to chase their ideas and goals. Check out her outlets here!",
     link: "/esteemed",
   },
   {
-    src: banner5,
+    src: bannerUrls.BANNER_5,
     heading: "Leadership Coach",
     body: "She was coached and certified under the leadership of John C. Maxwell. Bosede equips individuals and organizations with practical tools to break barriers, maximize their strengths, and amplify their success throughout all walks of life.",
     link: "leadership",
   },
   {
-    src: banner2,
+    src: bannerUrls.BANNER_2,
     heading: "Licensed CPR Instructor",
     body: "Bosede is also a licensed CPR instructor, offering classes to groups and individuals looking for a certification. Whether its required for work or if you just want the skill, schedule a class today!",
     link: "/cpr",
   },
 ];
 
+const pagOptions: PaginationOptions = {
+  enabled: true,
+  clickable: true,
+  type: "bullets",
+};
+
 const Home: NextPage = () => {
   //App state
-  const [currentSlide, setCurrentSlide] = useState(0); //Tracking the page of the pagination
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const [refCallback, slider] = useKeenSlider(
-    {
-      initial: 0,
-      slides: carouselData.length,
-      slideChanged(slider) {
-        setCurrentSlide(slider.track.details.rel);
-      },
-      loop: true,
-      detailsChanged(s) {
-        const new_opacities = s.track.details.slides.map(
-          (slide) => slide.portion
-        );
-      },
-    },
-    [
-      (slider) => {
-        let timeout: ReturnType<typeof setTimeout>;
-        let mouseOver = false;
-        function clearNextTimeout() {
-          clearTimeout(timeout);
-        }
-        function nextTimeout() {
-          clearTimeout(timeout);
-          if (mouseOver) return;
-          timeout = setTimeout(() => {
-            slider.next();
-          }, 5000);
-        }
-        slider.on("created", () => {
-          slider.container.addEventListener("mouseover", () => {
-            mouseOver = true;
-            clearNextTimeout();
-          });
-          slider.container.addEventListener("mouseout", () => {
-            mouseOver = false;
-            nextTimeout();
-          });
-          nextTimeout();
-        });
-        slider.on("dragStarted", clearNextTimeout);
-        slider.on("animationEnded", nextTimeout);
-        slider.on("updated", nextTimeout);
-      },
-    ]
-  );
   const theme = useTheme();
 
   //Media query to check if we're below md viewport width
   const matches = useMediaQuery(theme.breakpoints.down("md"));
-
-  // Functions
-  const goBack = (e: any) => {
-    e.stopPropagation() || slider.current?.prev();
-  };
-
-  const goForward = (e: any) => {
-    e.stopPropagation() || slider.current?.next();
-  };
 
   return (
     <div>
@@ -154,7 +102,7 @@ const Home: NextPage = () => {
           <Grid item xs={12}>
             <Box
               sx={{
-                background: `url(${banner6.src})`,
+                background: `url(${bannerUrls.BANNER_6})`,
                 backgroundSize: matches
                   ? 1080 * 0.8 + "px " + 412 * 0.8 + "px"
                   : 1080 * 1.5 + "px " + 412 * 1.5 + "px",
@@ -211,51 +159,30 @@ const Home: NextPage = () => {
               I am a _______
             </Typography>
           </Grid>
-
-          <Grid item xs={2} md={3} display="flex" alignItems="center">
-            <IconButton
-              onClick={goBack}
-              disabled={currentSlide === 0}
-              sx={{ mx: "auto" }}
+          <Grid item xs={12}>
+            <Swiper
+              spaceBetween={45}
+              centeredSlides={true}
+              autoplay={{
+                delay: 2500,
+                disableOnInteraction: false,
+              }}
+              pagination={pagOptions}
+              loop
+              modules={[Autoplay, Pagination, A11y]}
             >
-              <ArrowBackIosIcon />
-            </IconButton>
-          </Grid>
-          <Grid
-            item
-            xs={8}
-            md={6}
-            flexDirection="row"
-            flexWrap="nowrap"
-            ref={refCallback}
-            position="relative"
-            className="keen-slider"
-            sx={{
-              overflowX: "hidden",
-              overflowY: "hidden",
-              mb: 3,
-            }}
-          >
-            {carouselData.map((item) => (
-              <CreativeCard
-                key={item.heading}
-                src={item.src}
-                heading={item.heading}
-                body={item.body}
-                link={item.link}
-                className="keen-slider__slide"
-              />
-            ))}
-          </Grid>
-
-          <Grid item xs={2} md={3} display="flex" alignItems="center">
-            <IconButton
-              onClick={goForward}
-              disabled={currentSlide === 4}
-              sx={{ mx: "auto" }}
-            >
-              <ArrowForwardIosIcon />
-            </IconButton>
+              {carouselData.map((item) => (
+                <SwiperSlide key={item.heading}>
+                  <CreativeCard
+                    key={item.heading}
+                    src={item.src}
+                    heading={item.heading}
+                    body={item.body}
+                    link={item.link}
+                  />
+                </SwiperSlide>
+              ))}
+            </Swiper>
           </Grid>
           <Grid container>
             <Grid item xs={12}>
@@ -312,7 +239,7 @@ const Home: NextPage = () => {
                   <Box
                     width={matches ? "100%" : "50%"}
                     sx={{
-                      background: `url(${banner.src})`,
+                      background: `url(https://zhsexifadjbwxnndgsmc.supabase.co/storage/v1/object/public/assets/banners/banner-long.webp)`,
                       backgroundSize: matches
                         ? 1080 * 0.4 + "px " + 412 * 0.4 + "px"
                         : 1080 * 0.75 + "px " + 412 * 0.75 + "px",

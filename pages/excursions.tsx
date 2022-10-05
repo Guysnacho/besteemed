@@ -7,7 +7,6 @@ import {
   Button,
   Card,
   CardContent,
-  CardHeader,
   CardMedia,
   Container,
   Grid,
@@ -21,6 +20,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import InterestForm from "../Components/Individual/InterestForm";
 /**
  * @returns {NextPage} - A Nextjs Page
  */
@@ -29,6 +29,9 @@ const Excursions: NextPage = () => {
   const [hover1, setHover1] = useState(false);
   const [hover2, setHover2] = useState(false);
   const [hover3, setHover3] = useState(false);
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
 
   //Media query to check if we're below md viewport width
   const theme = useTheme();
@@ -49,6 +52,11 @@ const Excursions: NextPage = () => {
 
       <main>
         <Grid container>
+          <InterestForm
+            open={open}
+            handleOpen={handleOpen}
+            handleClose={handleClose}
+          />
           <Grid item xs={12} mt={6}>
             <Typography
               variant="h3"
@@ -198,9 +206,7 @@ const Excursions: NextPage = () => {
                     sx={{ mx: 4 }}
                     aria-label="Jordan excursion"
                     href=""
-                    onClick={() =>
-                      router.replace("/excursions/#Jordan")
-                    }
+                    onClick={() => router.replace("/excursions/#Jordan")}
                   >
                     Experience Jordan
                   </Button>
@@ -231,9 +237,7 @@ const Excursions: NextPage = () => {
                     sx={{ mx: 4 }}
                     aria-label="Cruise excursion"
                     href=""
-                    onClick={() =>
-                      router.replace("/excursions/#Oversea")
-                    }
+                    onClick={() => router.replace("/excursions/#Oversea")}
                   >
                     Sea Excursion
                   </Button>
@@ -242,39 +246,17 @@ const Excursions: NextPage = () => {
             </Container>
           </Grid>
           <Grid item xs={12}>
-            <Typography
-              variant="h4"
-              textAlign="center"
-              my={2}
-              id="Israel"
-            >
+            <Typography variant="h4" textAlign="center" my={2} id="Israel">
               Israel
             </Typography>
           </Grid>
-          <Grid item xs={12} md={7} my={2}>
-            <Paper
-              variant="outlined"
+          <Grid item xs={12} md={5} my={2}>
+            <Card
               sx={{
-                mx: 3,
-                maxHeight: matches ? "15rem" : "9rem",
-                overflow: "auto",
+                width: { xs: "60vw", sm: "50vw", md: "37vw", lg: "30vw" },
+                mx: "auto",
               }}
             >
-              <Typography
-                variant="body1"
-                fontSize={matches ? ".9rem" : undefined}
-                p={2}
-              >
-                Jerusalem is the holiest city in the world – holy for Jews,
-                Christians, and Muslims. The Old City of Jerusalem is home to
-                the Western Wall, the Church of the Holy Sepulchre, and the
-                Al-Aqsa Mosque. Along with it's religious significance, there
-                are tons of other things to do in Israel.
-              </Typography>
-            </Paper>
-          </Grid>
-          <Grid item xs={12} md={5} my={2} px={matches ? 4 : 2}>
-            <Card>
               <CardMedia sx={{ width: "100%" }}>
                 <Box
                   sx={{
@@ -301,18 +283,61 @@ const Excursions: NextPage = () => {
               </CardContent>
             </Card>
           </Grid>
-          <Grid item xs={12}>
-            <Typography
-              variant="h4"
-              textAlign="center"
-              my={2}
-              id="Jordan"
+          <Grid item xs={12} md={7} my={2}>
+            <Paper
+              variant="outlined"
+              sx={{
+                mx: "auto",
+                width: "90%",
+                maxHeight: matches ? "15rem" : "9rem",
+                overflow: "auto",
+              }}
             >
+              <Typography
+                variant="body1"
+                fontSize={matches ? ".9rem" : undefined}
+                p={2}
+              >
+                Jerusalem is the holiest city in the world – holy for Jews,
+                Christians, and Muslims. The Old City of Jerusalem is home to
+                the Western Wall, the Church of the Holy Sepulchre, and the
+                Al-Aqsa Mosque. Along with it's religious significance, there
+                are tons of other things to do in Israel.
+              </Typography>
+            </Paper>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                m: 3,
+              }}
+            >
+              <Button
+                variant="contained"
+                size={matches ? "small" : "large"}
+                color="success"
+                sx={{ mx: 4 }}
+                aria-label="Jordan excursion"
+                href=""
+                onClick={() => setOpen(true)}
+              >
+                Experience Israel
+              </Button>
+            </Box>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography variant="h4" textAlign="center" my={2} id="Jordan">
               Jordan
             </Typography>
           </Grid>
           <Grid item xs={12} md={5} my={2} px={matches ? 4 : 2}>
-            <Card>
+            <Card
+              sx={{
+                width: { xs: "60vw", sm: "50vw", md: "37vw", lg: "30vw" },
+                mx: "auto",
+              }}
+            >
               <CardMedia sx={{ width: "100%" }}>
                 <Box
                   sx={{
@@ -343,7 +368,8 @@ const Excursions: NextPage = () => {
             <Paper
               variant="outlined"
               sx={{
-                mx: 3,
+                mx: "auto",
+                width: "90%",
                 maxHeight: matches ? "15rem" : "9rem",
                 overflow: "auto",
               }}
@@ -360,20 +386,36 @@ const Excursions: NextPage = () => {
                 be discovered.
               </Typography>
             </Paper>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                m: 3,
+              }}
+            >
+              <Button
+                variant="contained"
+                size={matches ? "small" : "large"}
+                color="success"
+                sx={{ mx: 4 }}
+                aria-label="Jordan excursion"
+                href=""
+                onClick={() => setOpen(true)}
+              >
+                Experience Jordan
+              </Button>
+            </Box>
           </Grid>
           <Grid item xs={12}>
-            <Typography
-              variant="h4"
-              textAlign="center"
-              my={2}
-              id="Oversea"
-            >
+            <Typography variant="h4" textAlign="center" my={2} id="Oversea">
               Oversea Cruise
             </Typography>
             <Paper
               variant="outlined"
               sx={{
-                mx: 3,
+                mx: "auto",
+                width: "90%",
                 maxHeight: matches ? "15rem" : "9rem",
                 overflow: "auto",
               }}

@@ -16,14 +16,17 @@ import {
   TextField,
   Theme,
   Typography,
+  useMediaQuery,
   useTheme,
 } from "@mui/material";
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
 import Modal from "@mui/material/Modal";
+import useEnhancedEffect from "@mui/material/utils/useEnhancedEffect";
 import Image from "next/image";
-import { useState } from "react";
-import banner from "../../assets/banners/leadership.png";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { bannerUrls } from "../../utils/constants";
 import { supabase } from "../../utils/supabaseClient";
 
 const emailVal = new RegExp("^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+.[A-Za-z]{2,4}$");
@@ -61,7 +64,11 @@ const InterestForm = (props: {
   const [successMessage, setSuccessMessage] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
 
+  //Media query to check if we're below md viewport width
   const theme = useTheme();
+  const matchesSm = useMediaQuery(theme.breakpoints.down("sm"));
+  const matchesMd = useMediaQuery(theme.breakpoints.down("md"));
+  const router = useRouter();
 
   // Component functions
   const handleSignUp = () => {
@@ -109,6 +116,14 @@ const InterestForm = (props: {
     );
   };
 
+  //Set default fill based on route
+  useEffect(() => {
+    if (router.asPath == "/bookstore") setSelection(["Book Releases"]);
+    if (router.asPath == "/esteemed") setSelection(["Esteemed Woman"]);
+    if (router.asPath == "/excursions") setSelection(["Excursions"]);
+    if (router.asPath == "/cpr") setSelection(["CPR"]);
+  }, [router.asPath]);
+
   function getStyles(
     interest: string,
     selection: readonly string[],
@@ -149,7 +164,12 @@ const InterestForm = (props: {
             elevation={15}
           >
             <CardMedia>
-              <Image src={banner} alt="Stylish banner" />
+              <Image
+                src={bannerUrls.LEADERSHIP_1}
+                alt="Stylish banner"
+                width={matchesSm ? "350rem" : matchesMd ? "420rem" : "615rem"}
+                height="75vh"
+              />
             </CardMedia>
             <CardContent
               sx={{

@@ -13,7 +13,7 @@ import {
   Grid,
   Typography,
   useMediaQuery,
-  useTheme,
+  useTheme
 } from "@mui/material";
 import type { NextPage } from "next";
 import Head from "next/head";
@@ -21,6 +21,7 @@ import Image from "next/image";
 import { useState } from "react";
 import banner from "../assets/banners/leadership.png";
 import InterestForm from "../Components/Individual/InterestForm";
+import { bannerUrls } from "../utils/constants";
 
 const Services: NextPage = () => {
   //App state
@@ -157,7 +158,7 @@ const Services: NextPage = () => {
           <Grid item xs={12} md={8} pl={3}>
             <Container
               sx={{
-                background: `url(${banner.src})`,
+                background: `url(${bannerUrls.LEADERSHIP_1})`,
                 backgroundSize: matches
                   ? 625 * 1.2 + "px " + 258 * 1.2 + "px"
                   : 625 * 1.65 + "px " + 258 * 1.65 + "px",
