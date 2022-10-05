@@ -22,8 +22,10 @@ import {
 import Backdrop from "@mui/material/Backdrop";
 import Fade from "@mui/material/Fade";
 import Modal from "@mui/material/Modal";
+import useEnhancedEffect from "@mui/material/utils/useEnhancedEffect";
 import Image from "next/image";
-import { useState } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 import { bannerUrls } from "../../utils/constants";
 import { supabase } from "../../utils/supabaseClient";
 
@@ -64,8 +66,9 @@ const InterestForm = (props: {
 
   //Media query to check if we're below md viewport width
   const theme = useTheme();
-  const matchesSm = useMediaQuery(theme.breakpoints.down("md"));
-  const matchesMd = useMediaQuery(theme.breakpoints.down("xl"));
+  const matchesSm = useMediaQuery(theme.breakpoints.down("sm"));
+  const matchesMd = useMediaQuery(theme.breakpoints.down("md"));
+  const router = useRouter();
 
   // Component functions
   const handleSignUp = () => {
@@ -113,6 +116,14 @@ const InterestForm = (props: {
     );
   };
 
+  //Set default fill based on route
+  useEffect(() => {
+    if (router.asPath == "/bookstore") setSelection(["Book Releases"]);
+    if (router.asPath == "/esteemed") setSelection(["Esteemed Woman"]);
+    if (router.asPath == "/excursions") setSelection(["Excursions"]);
+    if (router.asPath == "/cpr") setSelection(["CPR"]);
+  }, [router.asPath]);
+
   function getStyles(
     interest: string,
     selection: readonly string[],
@@ -156,7 +167,7 @@ const InterestForm = (props: {
               <Image
                 src={bannerUrls.LEADERSHIP_1}
                 alt="Stylish banner"
-                width={matchesSm ? "250rem" : matchesMd ? "350rem" : "450rem"}
+                width={matchesSm ? "325rem" : matchesMd ? "395rem" : "575rem"}
                 height="75vh"
               />
             </CardMedia>
