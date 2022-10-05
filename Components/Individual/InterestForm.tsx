@@ -167,7 +167,7 @@ const InterestForm = (props: {
               <Image
                 src={bannerUrls.LEADERSHIP_1}
                 alt="Stylish banner"
-                width={matchesSm ? "325rem" : matchesMd ? "395rem" : "575rem"}
+                width={matchesSm ? "350rem" : matchesMd ? "420rem" : "615rem"}
                 height="75vh"
               />
             </CardMedia>
